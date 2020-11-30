@@ -17,8 +17,8 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.average_lf = tk.LabelFrame(self.master, text="Average Measures", relief="flat")
-        self.average_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
+        self.stat_lf = tk.LabelFrame(self.master, text="Average Measures", relief="flat")
+        self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
@@ -29,14 +29,14 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.ch7 = tk.StringVar()
         self.ch8 = tk.StringVar()
 
-        self.ch_b1 = tk.Checkbutton(self.average_lf, text="Sum", variable=self.ch1, onvalue="Sum", tristatevalue=0, )
-        self.ch_b2 = tk.Checkbutton(self.average_lf, text="Mean", variable=self.ch2, onvalue="Mean", tristatevalue=0, )
-        self.ch_b3 = tk.Checkbutton(self.average_lf, text="Max", variable=self.ch3, onvalue="Max", tristatevalue=0, )
-        self.ch_b4 = tk.Checkbutton(self.average_lf, text="Min", variable=self.ch4, onvalue="Min", tristatevalue=0, )
-        self.ch_b5 = tk.Checkbutton(self.average_lf, text="Median", variable=self.ch5, onvalue="Median", tristatevalue=0, )
-        self.ch_b6 = tk.Checkbutton(self.average_lf, text="Quantile_25", variable=self.ch6, onvalue="Quantile_25",tristatevalue=0, )
-        self.ch_b7 = tk.Checkbutton(self.average_lf, text="Quantile_75", variable=self.ch7, onvalue="Quantile_75", tristatevalue=0, )
-        self.ch_b8 = tk.Checkbutton(self.average_lf, text="Dominant", variable=self.ch8, onvalue="Dominant", tristatevalue=0, )
+        self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Sum", variable=self.ch1, onvalue="Sum", tristatevalue=0, )
+        self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch2, onvalue="Mean", tristatevalue=0, )
+        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Max", variable=self.ch3, onvalue="Max", tristatevalue=0, )
+        self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Min", variable=self.ch4, onvalue="Min", tristatevalue=0, )
+        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch5, onvalue="Median", tristatevalue=0, )
+        self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25", variable=self.ch6, onvalue="Quantile_25", tristatevalue=0, )
+        self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75", variable=self.ch7, onvalue="Quantile_75", tristatevalue=0, )
+        self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8, onvalue="Dominant", tristatevalue=0, )
 
         self.ch_b1.grid(row=0, sticky="W")
         self.ch_b2.grid(row=1, sticky="W")
@@ -79,20 +79,20 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.widget = None
         self.toolbar = None
-        self.text_statistics = None
+        self.text_stat = None
 
 
     def close_window(self):
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_variables = self.text_2.get("1.0", "end")
-        self.input_variables = self.input_variables.split(" ")
-        self.input_variables = [x for x in self.input_variables if x]  # to usuwa puste (w srodku ale nie na koncu)
-        self.input_variables[-1] = self.input_variables[-1].strip()  # to usuwa \n
-        if self.input_variables[-1] == '': #usuwa ostatnie puste miejsce jakby się pojawiło
-            self.input_variables = self.input_variables[:-1]
-        self.check_list = all(item in self.variables for item in self.input_variables)
+        self.input_var = self.text_2.get("1.0", "end")
+        self.input_var = self.input_var.split(" ")
+        self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
+        self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
+        if self.input_var[-1] == '': #usuwa ostatnie puste miejsce jakby się pojawiło
+            self.input_var = self.input_var[:-1]
+        self.check_list = all(item in self.variables for item in self.input_var)
 
         self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),self.ch5.get(), self.ch6.get(),
                           self.ch7.get(), self.ch8.get(), ]
@@ -109,13 +109,16 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.toolbar:
                     self.toolbar.destroy()
 
+                if self.text_stat:
+                    self.text_stat.destroy()
+
                 f = Figure(figsize=(5, 5), dpi=100)
                 a = f.add_subplot(111)
                 order_numbers = []
 
-                for i in range(len(self.data[self.input_variables])):
+                for i in range(len(self.data[self.input_var])):
                     order_numbers.append(i)
-                a.plot(order_numbers, self.data[self.input_variables])
+                a.plot(order_numbers, self.data[self.input_var])
 
                 canvas = FigureCanvasTkAgg(f, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
@@ -124,22 +127,21 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
 
             elif self.ratio_var.get() == 1:
 
-
                 if self.widget:
                     self.widget.destroy()
 
                 if self.toolbar:
                     self.toolbar.destroy()
 
-                if self.text_statistics:
-                    self.text_statistics.destroy()
+                if self.text_stat:
+                    self.text_stat.destroy()
 
-                self.statistical_backend = StatisticBackend(self.data, self.input_variables, self.check_b_l,0,)
-                self.text_statistics = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-                self.text_statistics.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                self.text_statistics.configure(state='normal')
-                self.text_statistics.insert(tk.END, self.statistical_backend.average_measures_df)
-                self.text_statistics.configure(state='disabled')
+                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 0, )
+                self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
+                self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                self.text_stat.configure(state='normal')
+                self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
+                self.text_stat.configure(state='disabled')
 
         else:
             popup_window("Information", "Incorrect variable name!")
