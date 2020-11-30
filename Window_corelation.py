@@ -1,6 +1,4 @@
 import tkinter as tk
-from frozzen_classes_function_ideas.Class_Graphics import Plots
-import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Function_message_window import popup_window
