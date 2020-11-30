@@ -92,8 +92,12 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.input_variables[-1] = self.input_variables[-1].strip()  # to usuwa \n
         if self.input_variables[-1] == '': #usuwa ostatnie puste miejsce jakby się pojawiło
             self.input_variables = self.input_variables[:-1]
-
         self.check_list = all(item in self.variables for item in self.input_variables)
+
+        self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),self.ch5.get(), self.ch6.get(),
+                          self.ch7.get(), self.ch8.get(), ]
+        # to usuwa puste pola żeby można było załadować odpowiednie nazywy
+        self.check_b_l = [x for x in self.check_b_l if x]
 
         if self.check_list is True:
             # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
@@ -120,12 +124,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
 
             elif self.ratio_var.get() == 1:
 
-                self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),
-                                  self.ch5.get(),self.ch6.get(), self.ch7.get(), self.ch8.get(),]
-                # todo tutaj na pewno jest błąd bo trzeba sprawdzić co przesyła gdzie i tamtą clasę osobno jak ona działa po poprawce
-                print(self.data)
-                print(self.check_b_l)
-                print(self.input_variables)
+
                 if self.widget:
                     self.widget.destroy()
 
@@ -135,7 +134,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_statistics:
                     self.text_statistics.destroy()
 
-                self.statistical_backend = StatisticBackend(self.data, self.input_variables, 0, self.check_b_l)
+                self.statistical_backend = StatisticBackend(self.data, self.input_variables, self.check_b_l,0,)
                 self.text_statistics = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_statistics.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_statistics.configure(state='normal')

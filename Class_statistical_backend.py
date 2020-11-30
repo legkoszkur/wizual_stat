@@ -21,6 +21,8 @@ class StatisticBackend:
         self.skewness_id = ["Skewness"]
         self.kurtosis_id = ["Kurtosis"]
 
+
+
         if self.wish == 0:
             for i in self.input_var:
                 self.average_m_l.append([
@@ -31,6 +33,7 @@ class StatisticBackend:
                 np.array(self.average_m_l).reshape(-1, len(self.input_var)),
                 index=self.average_m_id, columns=self.input_var)
             self.average_measures_df = self.average_measures_df.loc[self.input_stat]
+
 
         elif self.wish == 1:
             for i in self.input_var:
