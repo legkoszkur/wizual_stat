@@ -30,7 +30,7 @@ class StatisticBackend:
             self.average_measures_df = pd.DataFrame(
                 np.array(self.average_m_l).reshape(-1, len(self.input_var)),
                 index=self.average_m_id, columns=self.input_var)
-            self.average_measures_df = self.average_measures_df.loc[[self.input_stat]]
+            self.average_measures_df = self.average_measures_df.loc[self.input_stat]
 
         elif self.wish == 1:
             for i in self.input_var:
@@ -42,7 +42,7 @@ class StatisticBackend:
             self.differentiation_measures_df = pd.DataFrame(
                 np.array(self.differentiation_m_l).reshape(-1, len(self.input_var)),
                 index=self.differentiation_m_id, columns=self.input_var)
-            self.differentiation_measures_df = self.differentiation_measures_df.loc[[self.input_stat]]
+            self.differentiation_measures_df = self.differentiation_measures_df.loc[self.input_stat]
 
         elif self.wish == 2:
             for i in self.input_var:
@@ -50,7 +50,7 @@ class StatisticBackend:
             self.skewness_df = pd.DataFrame(
                 np.array(self.skewness_l).reshape(-1, len(self.input_var)),
                 index=self.skewness_id, columns=self.input_var)
-            self.skewness_df = self.skewness_df.loc[[self.input_stat]]
+            self.skewness_df = self.skewness_df.loc[self.input_stat]
 
         elif self.wish == 3:
             for i in self.input_var:
@@ -58,4 +58,4 @@ class StatisticBackend:
             self.kurtosis_df = pd.DataFrame(
                 np.array(self.kurtosis_l).reshape(-1, len(self.input_var)),
                 index=self.kurtosis_id, columns=self.input_var)
-            self.kurtosis_df = self.kurtosis_df.loc[[self.input_stat]]
+            self.kurtosis_df = self.kurtosis_df.loc[self.input_stat]
