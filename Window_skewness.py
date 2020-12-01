@@ -76,6 +76,8 @@ class Skewness:  # todo tutuaj będzie okienko do tworzenia wykresów
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
+        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
+
         if self.check_list is True:
             # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
 
@@ -113,7 +115,7 @@ class Skewness:  # todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
+
                 self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')

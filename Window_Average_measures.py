@@ -99,6 +99,8 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
+        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 0, )
+
         if self.check_list is True:
             # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
 
