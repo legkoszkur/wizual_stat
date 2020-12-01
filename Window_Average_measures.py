@@ -138,7 +138,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 0, )
+
                 self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')

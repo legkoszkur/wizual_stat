@@ -64,9 +64,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="brudnopis2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wizual_stat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brudnopisy" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brudnopisy/brudnopis2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Window_main" />
+        <item itemvalue="Python.brudnopis2" />
         <item itemvalue="Python.brudnopis1" />
       </list>
     </recent_temporary>
@@ -92,22 +114,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="254" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606754913840" />
-    <state width="1578" height="217" key="GridCell.Tab.0.bottom" timestamp="1606858429411">
+    <state width="1578" height="217" key="GridCell.Tab.0.bottom" timestamp="1606860393636">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606858429411" />
-    <state width="1578" height="217" key="GridCell.Tab.0.center" timestamp="1606858429410">
+    <state width="1578" height="217" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606860393636" />
+    <state width="1578" height="217" key="GridCell.Tab.0.center" timestamp="1606860393636">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="217" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606858429410" />
-    <state width="1578" height="217" key="GridCell.Tab.0.left" timestamp="1606858429410">
+    <state width="1578" height="217" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606860393636" />
+    <state width="1578" height="217" key="GridCell.Tab.0.left" timestamp="1606860393636">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="217" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606858429410" />
-    <state width="1578" height="217" key="GridCell.Tab.0.right" timestamp="1606858429411">
+    <state width="1578" height="217" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606860393636" />
+    <state width="1578" height="217" key="GridCell.Tab.0.right" timestamp="1606860393636">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="217" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606858429411" />
+    <state width="1578" height="217" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606860393636" />
     <state x="301" y="60" key="SettingsEditor" timestamp="1606754906007">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

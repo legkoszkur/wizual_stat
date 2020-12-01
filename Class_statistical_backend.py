@@ -31,7 +31,7 @@ class StatisticBackend:
                     np.quantile(self.data[i], q=0.75), self.data[i].mode(dropna=False)[0]])
             self.average_measures_df = pd.DataFrame(np.transpose(self.average_m_l),index=self.average_m_id, columns=self.input_var)
             self.average_measures_df = self.average_measures_df.loc[self.input_stat]
-            self.average_measures_df = self.average_measures_df.round(decimals=1)
+            self.average_measures_df = self.average_measures_df.round(decimals=4)
 
 
 
@@ -45,6 +45,7 @@ class StatisticBackend:
             self.differentiation_measures_df = pd.DataFrame(np.transpose(self.differentiation_m_l),
                                                             index=self.differentiation_m_id, columns=self.input_var)
             self.differentiation_measures_df = self.differentiation_measures_df.loc[self.input_stat]
+            self.differentiation_measures_df = self.differentiation_measures_df.round(decimals=4)
 
         elif self.wish == 2:
             for i in self.input_var:
