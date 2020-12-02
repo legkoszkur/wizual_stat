@@ -31,14 +31,22 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.ch7 = tk.StringVar()
         self.ch8 = tk.StringVar()
 
-        self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Sum", variable=self.ch1, onvalue="Sum", tristatevalue=0, )
-        self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch2, onvalue="Mean", tristatevalue=0, )
-        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Max", variable=self.ch3, onvalue="Max", tristatevalue=0, )
-        self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Min", variable=self.ch4, onvalue="Min", tristatevalue=0, )
-        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch5, onvalue="Median", tristatevalue=0, )
-        self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25", variable=self.ch6, onvalue="Quantile_25", tristatevalue=0, )
-        self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75", variable=self.ch7, onvalue="Quantile_75", tristatevalue=0, )
-        self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8, onvalue="Dominant", tristatevalue=0, )
+        self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Sum", variable=self.ch1,
+                                    onvalue="Sum",offvalue='', tristatevalue=0, )
+        self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch2,
+                                    onvalue="Mean",offvalue='', tristatevalue=0, )
+        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Max", variable=self.ch3,
+                                    onvalue="Max",offvalue='', tristatevalue=0, )
+        self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Min", variable=self.ch4,
+                                    onvalue="Min",offvalue='', tristatevalue=0, )
+        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch5,
+                                    onvalue="Median",offvalue='', tristatevalue=0, )
+        self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25", variable=self.ch6,
+                                    onvalue="Quantile_25",offvalue='', tristatevalue=0, )
+        self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75", variable=self.ch7,
+                                    onvalue="Quantile_75",offvalue='', tristatevalue=0, )
+        self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8,
+                                    onvalue="Dominant",offvalue='', tristatevalue=0, )
 
         self.ch_b1.grid(row=0, sticky="W")
         self.ch_b2.grid(row=1, sticky="W")
@@ -118,15 +126,19 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
+
+
                 self.X = np.arange(len(self.input_var))
 
                 f = plt.figure()
                 ax = f.add_axes([0,0,1,1])# to jest jak place[x0, y0, width, height]
 
-                self.color_l = ["red","blue","green","white","yellow","pink","gold","light blue"]
+                self.color_l = ["red","blue","green","brown","yellow","pink","gold","cyan"]
 
-                for i in range(len(self.check_b_l)):
-                    ax.bar(self.X + i*0.3,
+                for i in range(len(self.check_b_l)):# todo tu chyba trzeba będzie zastosowac
+                    # todo podwójną pętlę żeby jedna najpierw ustawiała wektor z danych (wszystkich sum)
+                    # todo a potem druga dodawała do wykresu
+                    ax.bar(self.X + i*0.125,
                            self.statistical_backend.average_measures_df.loc[self.check_b_l[i]].values.tolist(),
                            color=self.color_l[i], width=0.1)
 
@@ -134,6 +146,8 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+
 
             elif self.ratio_var.get() == 1:
 
