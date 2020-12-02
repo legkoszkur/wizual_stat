@@ -42,6 +42,7 @@ class StatisticBackend:
                     max(self.data[i]) - min(self.data[i]),
                     np.quantile(self.data[i], q=0.75) - np.quantile(self.data[i], q=0.25),
                     (np.quantile(self.data[i], q=0.75) - np.quantile(self.data[i], q=0.25)) / 2, ])
+
             self.differentiation_measures_df = pd.DataFrame(np.transpose(self.differentiation_m_l),
                                                             index=self.differentiation_m_id, columns=self.input_var)
             self.differentiation_measures_df = self.differentiation_measures_df.loc[self.input_stat]

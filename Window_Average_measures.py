@@ -1,4 +1,6 @@
 import tkinter as tk
+import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Function_message_window import popup_window
@@ -99,6 +101,8 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
+
+
         self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 0, )
 
         if self.check_list is True:
@@ -114,13 +118,17 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                f = Figure(figsize=(5, 5), dpi=100)
-                a = f.add_subplot(111)
-                order_numbers = []
+                self.X = np.arange(len(self.input_var))
 
-                for i in range(len(self.data[self.input_var])):
-                    order_numbers.append(i)
-                a.plot(order_numbers, self.data[self.input_var])
+                f = plt.figure()
+                ax = f.add_axes([0,0,1,1])# to jest jak place[x0, y0, width, height]
+
+                self.color_l = ["red","blue","green","white","yellow","pink","gold","light blue"]
+
+                for i in range(len(self.check_b_l)):
+                    ax.bar(self.X + i*0.3,
+                           self.statistical_backend.average_measures_df.loc[self.check_b_l[i]].values.tolist(),
+                           color=self.color_l[i], width=0.1)
 
                 canvas = FigureCanvasTkAgg(f, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
@@ -138,11 +146,12 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-
                 self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')
                 self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
+                print(self.statistical_backend.average_measures_df)
+                print(self.statistical_backend.average_m_l)
                 self.text_stat.configure(state='disabled')
 
         else:
