@@ -1,26 +1,5 @@
-import matplotlib, numpy, sys
-matplotlib.use('TkAgg')
-from matplotlib.backends.backend_tkagg import FigureCanvasTk
-from matplotlib.figure import Figure
-if sys.version_info[0] < 3:
-    import Tkinter as Tk
-else:
-    import tkinter as Tk
-
-root = Tk.Tk()
-
-f = Figure(figsize=(5,4), dpi=100)
-ax = f.add_subplot(111)
-
-data = (20, 35, 30, 35, 27)
-
-ind = numpy.arange(5)  # the x locations for the groups
-width = .5
-
-rects1 = ax.bar(ind, data, width)
-
-canvas = FigureCanvasTk(f, master=root)
-canvas.draw()
-canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-
-Tk.mainloop()
+import numpy as np
+x = np.array([4492, 51.04545454545455, 99, 1, 51.0, 25.0, 80.25, 97], [4331, 49.21590909090909, 99, 1, 49.5, 25.75, 71.0, 26], [4527, 51.44318181818182, 100, 1, 48.5, 22.75, 75.75, 21])
+l = np.array([2,3,4,5,3,2])
+print(l.ndim)
+print(np.reshape(l,(6,1)))

@@ -29,9 +29,14 @@ class StatisticBackend:
                     sum(self.data[i]), np.mean(self.data[i]), max(self.data[i]), min(self.data[i]),
                     np.quantile(self.data[i], q=0.5), np.quantile(self.data[i], q=0.25),
                     np.quantile(self.data[i], q=0.75), self.data[i].mode(dropna=False)[0]])
-            self.average_measures_df = pd.DataFrame(np.transpose(self.average_m_l),index=self.average_m_id, columns=self.input_var)
+            self.average_measures_df = pd.DataFrame(np.transpose(self.average_m_l),
+                                                     index=self.average_m_id, columns=self.input_var)
+
             self.average_measures_df = self.average_measures_df.loc[self.input_stat]
             self.average_measures_df = self.average_measures_df.round(decimals=4)
+            self.average_measures_dfT = self.average_measures_df.T
+
+
 
 
 

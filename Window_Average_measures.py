@@ -104,14 +104,14 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
             self.input_var = self.input_var[:-1]
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),self.ch5.get(), self.ch6.get(),
-                          self.ch7.get(), self.ch8.get(), ]
+        self.input_stat_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(), self.ch6.get(),
+                             self.ch7.get(), self.ch8.get(), ]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
-        self.check_b_l = [x for x in self.check_b_l if x]
+        self.input_stat_l = [x for x in self.input_stat_l if x]
 
 
 
-        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 0, )
+        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_stat_l, 0, )
 
         if self.check_list is True:
             # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
@@ -126,28 +126,28 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-
-
-                self.X = np.arange(len(self.input_var))
+                print(self.statistical_backend.average_measures_dfT.loc[self.input_var[0]].values.tolist())
+                print(self.statistical_backend.average_measures_dfT.loc[self.input_var[0]])
 
                 f = plt.figure()
-                ax = f.add_axes([0,0,1,1])# to jest jak place[x0, y0, width, height]
+                ax = f.add_axes([0, 0, 1, 1])  # to jest jak place[x0, y0, width, height]
+                self.color_l = ["red", "blue", "green", "brown", "yellow", "pink", "gold", "cyan"]
+                self.X = np.arange(len(self.input_stat_l))
 
-                self.color_l = ["red","blue","green","brown","yellow","pink","gold","cyan"]
-
-                for i in range(len(self.check_b_l)):# todo tu chyba trzeba będzie zastosowac
-                    # todo podwójną pętlę żeby jedna najpierw ustawiała wektor z danych (wszystkich sum)
-                    # todo a potem druga dodawała do wykresu
-                    ax.bar(self.X + i*0.125,
-                           self.statistical_backend.average_measures_df.loc[self.check_b_l[i]].values.tolist(),
+                for i in range(len(self.input_var)):
+                    print(i)
+                    print(self.statistical_backend.average_measures_dfT)
+                    print(self.statistical_backend.average_measures_dfT.loc[self.input_var[i]].values.tolist())
+                    ax.bar(self.X + i * 0.1,
+                           self.statistical_backend.average_measures_dfT.loc[self.input_var[i]].values.tolist(),
                            color=self.color_l[i], width=0.1)
+
+
 
                 canvas = FigureCanvasTkAgg(f, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
-
 
             elif self.ratio_var.get() == 1:
 
@@ -164,8 +164,6 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')
                 self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
-                print(self.statistical_backend.average_measures_df)
-                print(self.statistical_backend.average_m_l)
                 self.text_stat.configure(state='disabled')
 
         else:
