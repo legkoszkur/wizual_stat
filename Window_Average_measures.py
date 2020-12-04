@@ -22,6 +22,9 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.stat_lf = tk.LabelFrame(self.master, text="Average Measures", relief="flat")
         self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
 
+        self.color_lf = tk.LabelFrame(self.master, text="Color changer",)
+        self.color_lf.place(relx=0.005, rely=0.375, relwidth=0.185, relheight=0.08)
+
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
         self.ch3 = tk.StringVar()
@@ -48,14 +51,14 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8,
                                     onvalue="Dominant",offvalue='', tristatevalue=0, )
 
-        self.ch_b1.grid(row=0, sticky="W")
-        self.ch_b2.grid(row=1, sticky="W")
-        self.ch_b3.grid(row=2, sticky="W")
-        self.ch_b4.grid(row=3, sticky="W")
-        self.ch_b5.grid(row=4, sticky="W")
-        self.ch_b6.grid(row=5, sticky="W")
-        self.ch_b7.grid(row=6, sticky="W")
-        self.ch_b8.grid(row=7, sticky="W")
+        self.ch_b1.grid(row=0,column=1, sticky="W")
+        self.ch_b2.grid(row=1,column=1, sticky="W")
+        self.ch_b3.grid(row=2,column=1, sticky="W")
+        self.ch_b4.grid(row=3,column=1, sticky="W")
+        self.ch_b5.grid(row=4,column=1, sticky="W")
+        self.ch_b6.grid(row=5,column=1, sticky="W")
+        self.ch_b7.grid(row=6,column=1, sticky="W")
+        self.ch_b8.grid(row=7,column=1, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -65,7 +68,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.variables = list(data.columns)
 
-        self.text_lf1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
+        self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
         # warp word powoduje że przenosi całe słowo do następnej linijki
@@ -74,7 +77,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.text_1.insert(tk.END, self.variables)
         self.text_1 .configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master, bg="white", text="Variables on graph", relief="flat")
+        self.text_lf2 = tk.LabelFrame(self.master, text="Variables on graph", relief="flat")
         self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -86,6 +89,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.radio_b2 = tk.Radiobutton(self.options_lf, text="Graph", value=0, variable=self.ratio_var)
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
+
 
         self.widget = None
         self.toolbar = None
