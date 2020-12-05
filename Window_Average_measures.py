@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from Function_message_window import popup_window
+from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
 
 class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
@@ -128,41 +128,12 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                print(self.statistical_backend.average_measures_dfT.loc[self.input_var[0]].values.tolist())
-                print(self.statistical_backend.average_measures_dfT.loc[self.input_var[0]])
-                """
-                f = plt.figure()
-                ax = f.add_axes([0, 0, 1, 1])  # to jest jak place[x0, y0, width, height]
-                self.color_l = ["red", "blue", "green", "brown", "yellow", "pink", "gold", "cyan"]
-                self.X = np.arange(len(self.input_stat_l))
-
-                for i in range(len(self.input_var)):
-
-                    print(self.statistical_backend.average_measures_dfT)
-                    ax.legend(self.input_var, loc='upper left', fancybox=True, framealpha=1, shadow=True, borderpad=1)
-
-                    
-                    ax.ylim([min(self.statistical_backend.average_measures_dfT) +
-                             min(self.statistical_backend.average_measures_dfT) * 0.1,
-                             max(self.statistical_backend.average_measures_dfT) +
-                             max(self.statistical_backend.average_measures_dfT) * 0.1])
-                    
-
-                    ax.bar(self.X + i * 0.11,
-                           self.statistical_backend.average_measures_dfT.loc[self.input_var[i]].values.tolist(),
-                           color=self.color_l[i], width=0.1,)
-
-                    print("to jest to: ",self.statistical_backend.average_measures_dfT.loc[self.input_var[i]].values.tolist())
-                """
-
-                df = self.statistical_backend.average_measures_dfT
+                df = self.statistical_backend.average_measures_df
                 figure = plt.figure()#figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 a = figure.add_subplot(111)#to jest jeden z wykresów
                 df.plot(kind="bar",ax=a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
                 #znajdzie się mój wykres w tym przypadku w "a"
                 #potem renderuje go za pomoca
-
-
 
                 canvas = FigureCanvasTkAgg(figure, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)

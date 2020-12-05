@@ -34,7 +34,7 @@ class StatisticBackend:
 
             self.average_measures_df = self.average_measures_df.loc[self.input_stat]
             self.average_measures_df = self.average_measures_df.round(decimals=4)
-            self.average_measures_dfT = self.average_measures_df.T
+
 
 
 

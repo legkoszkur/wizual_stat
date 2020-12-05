@@ -6,9 +6,9 @@ from Window_skewness import Skewness
 from Window_kurtosis import Kurtosis
 from Window_models import Models
 from Window_settings import Settings
-from Function_message_window import popup_window
+from Window_popup_message import popup_window
 from Window_corelation import Correlation
-from class_data_manager import Data_manager
+from Class_data_manager import Data_manager
 
 
 FONT_label_title = []

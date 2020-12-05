@@ -3,7 +3,7 @@ from tkinter.filedialog import askopenfile
 from tkinter import messagebox, ttk
 from pandas import *
 import os
-from Function_message_window import popup_window
+from Window_popup_message import popup_window
 
 
 # todo wywalić całego labelframa z ładowaniem danych do osobnej klasy dajesz 2 mastery i na dole czerwony pasek (data loaded)/(data unavalible)

@@ -28,7 +28,28 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.Window_main">
+  <component name="RunManager" selected="Python.Class_Colors_Palette">
+    <configuration name="Class_Colors_Palette" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="wizual_stat" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Class_Colors_Palette.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Window_Average_measures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wizual_stat" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,7 +113,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="brudnopis1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="brudnopis 5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wizual_stat" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -104,28 +125,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brudnopisy/brudnopis1.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="brudnopis3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="wizual_stat" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/brudnopisy" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brudnopisy/brudnopis3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/brudnopisy/brudnopis 5.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -136,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Class_Colors_Palette" />
+        <item itemvalue="Python.brudnopis 5" />
         <item itemvalue="Python.Window_main" />
         <item itemvalue="Python.Window_Average_measures" />
         <item itemvalue="Python.brudnopis 4" />
-        <item itemvalue="Python.brudnopis3" />
-        <item itemvalue="Python.brudnopis1" />
       </list>
     </recent_temporary>
   </component>
@@ -165,25 +165,33 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="254" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606754913840" />
-    <state width="1578" height="13" key="GridCell.Tab.0.bottom" timestamp="1607191328527">
+    <state width="1578" height="159" key="GridCell.Tab.0.bottom" timestamp="1607197160601">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="13" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607191328527" />
-    <state width="1578" height="13" key="GridCell.Tab.0.center" timestamp="1607191328527">
+    <state width="1898" height="205" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
+    <state width="1578" height="159" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607197160601" />
+    <state width="1578" height="159" key="GridCell.Tab.0.center" timestamp="1607197160601">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="13" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607191328527" />
-    <state width="1578" height="13" key="GridCell.Tab.0.left" timestamp="1607191328527">
+    <state width="1898" height="205" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
+    <state width="1578" height="159" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607197160601" />
+    <state width="1578" height="159" key="GridCell.Tab.0.left" timestamp="1607197160601">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="13" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607191328527" />
-    <state width="1578" height="13" key="GridCell.Tab.0.right" timestamp="1607191328527">
+    <state width="1898" height="205" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
+    <state width="1578" height="159" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607197160601" />
+    <state width="1578" height="159" key="GridCell.Tab.0.right" timestamp="1607197160601">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1578" height="13" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607191328527" />
+    <state width="1898" height="205" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
+    <state width="1578" height="159" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607197160601" />
     <state x="301" y="60" key="SettingsEditor" timestamp="1606754906007">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="60" key="SettingsEditor/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606754906007" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1607195300180">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607195300180" />
   </component>
 </project>

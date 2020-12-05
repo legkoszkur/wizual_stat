@@ -1,7 +1,7 @@
 import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from Function_message_window import popup_window
+from Window_popup_message import popup_window
 
 class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
     def __init__(self, master,data):
