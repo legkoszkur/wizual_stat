@@ -1,11 +1,12 @@
 import tkinter as tk
-from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+import seaborn as sns
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
 
 
-class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
+class SkewnessKurtosis:
     def __init__(self, master, data):
         self.master = master
         self.data = data
@@ -22,9 +23,14 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
         self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
 
         self.ch1 = tk.StringVar()
+        self.ch2 = tk.StringVar()
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Skewness", variable=self.ch1,
                                     onvalue="Skewness", tristatevalue=0, )
+        self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Kurtosis", variable=self.ch2,
+                                    onvalue="Kurtosis", tristatevalue=0, )
+
         self.ch_b1.grid(row=0, sticky="W")
+        self.ch_b2.grid(row=1, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -34,7 +40,7 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
 
         self.variables = list(data.columns)
 
-        self.text_lf1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
+        self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
 
@@ -43,7 +49,7 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master, bg="white", text="Variables on graph", relief="flat")
+        self.text_lf2 = tk.LabelFrame(self.master, text="Variables on graph", relief="flat")
         self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -71,17 +77,16 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
         if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
             self.input_var = self.input_var[:-1]
         self.check_list = all(item in self.variables for item in self.input_var)
-
-        self.check_b_l = [self.ch1.get(),]
+        self.check_b_l = [self.ch1.get(),self.ch2.get()]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
         self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
         if self.check_list is True:
-            # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
 
             if self.ratio_var.get() == 0:
+
                 if self.widget:
                     self.widget.destroy()
 
@@ -91,15 +96,15 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                f = Figure(figsize=(5, 5), dpi=100)
-                a = f.add_subplot(111)
-                order_numbers = []
+                print(self.data)
 
-                for i in range(len(self.data[self.input_var])):
-                    order_numbers.append(i)
-                a.plot(order_numbers, self.data[self.input_var])
 
-                canvas = FigureCanvasTkAgg(f, master=self.graph_f)
+                self.df = self.data[self.input_var]
+                self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
+                self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
+                self.bar_g = self.df.distplot(ax=self.a)# tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+
+                canvas = FigureCanvasTkAgg(self.figure , master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
@@ -115,16 +120,14 @@ class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-
                 self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')
-                self.text_stat.insert(tk.END, self.statistical_backend.skewness_df)
+                self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
                 self.text_stat.configure(state='disabled')
 
         else:
             popup_window("Information", "Incorrect variable name!")
-
 
 
 

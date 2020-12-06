@@ -43,7 +43,7 @@ class StartPage:
         graph.add_command(label="Correlation", command=lambda: self.new_window(Correlation))
         stat.add_command(label="Average measures", command=lambda: self.new_window(Average_measures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentationMeasures))
-        stat.add_command(label="Skewness", command=lambda: self.new_window(SkewnessKurtosis))
+        stat.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
         models.add_command(label="Models", command=lambda: self.new_window(Models))
         tut.add_command(label="Tutorials", command=lambda: print("here will be some youtube tutorials"))
 
