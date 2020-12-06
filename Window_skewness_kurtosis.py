@@ -102,12 +102,20 @@ class SkewnessKurtosis:
                 self.df = self.data[self.input_var]
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
-                self.bar_g = self.df.distplot(ax=self.a)# tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
-
+                self.bar_g = sns.distplot(self.df,ax=self.a, color='darkseagreen')# tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                plt.xlabel("values", labelpad=15)
+                plt.ylabel("frequency", labelpad=15)
                 canvas = FigureCanvasTkAgg(self.figure , master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                #todo tutaj jest kilka rzeczy do zrobienie
+                #1. zrobić żeby wykres był dokładniejszy
+                #2. zrobić opcje dodawania sredniej itp
+                #3. zrobić żeby można było zmieniać skew i kurt
+                #https://dfrieds.com/math/skewness.html
+                #https://seaborn.pydata.org/generated/seaborn.distplot.html
+
 
             elif self.ratio_var.get() == 1:
 
