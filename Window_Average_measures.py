@@ -1,10 +1,10 @@
 import tkinter as tk
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
+from tkinter import colorchooser
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
+
 
 class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
     def __init__(self, master,data):
@@ -21,8 +21,6 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.stat_lf = tk.LabelFrame(self.master, text="Average Measures", relief="flat")
         self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
-
-
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
@@ -89,10 +87,29 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
+        self.color_lf = tk.LabelFrame(self.master, text="Change color", )
+        self.color_lf.place(relx=0.005, rely=0.375, relwidth=0.185, relheight=0.08)
+
+        self.type_b = tk.Button(self.color_lf, text="Type", command=lambda: self.color_backend())
+        self.type_b.place(relx=0.05, rely=0.05, relwidth=0.35, relheight=0.8)
+
+        self.text_c = tk.Entry(self.color_lf, bd=4, relief="groove")
+        self.text_c.place(relx=0.45, rely=0.05, relwidth=0.5, relheight=0.88)
+        self.text_c.configure(state='disabled')
+
         self.widget = None
         self.toolbar = None
         self.text_stat = None
 
+    def color_backend(self):
+        if self.text_c.get() in self.input_var:
+            self.text_c.configure(state='disabled')
+            self.c_chooser = colorchooser.askcolor()
+            self.my_color = self.c_chooser[1]  # chosen color
+            self.index_of_variable = self.input_var.index(self.text_c.get())  # color index
+            self.text_c.configure(state='normal')
+        else:
+            popup_window("Warning","Please insert correct variable name.")
 
     def close_window(self):
         self.master.destroy()
@@ -110,8 +127,6 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                              self.ch7.get(), self.ch8.get(), ]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.input_stat_l = [x for x in self.input_stat_l if x]
-
-
 
         self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_stat_l, 0, )
 
@@ -131,7 +146,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 df = self.statistical_backend.average_measures_df
                 figure = plt.figure()#figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 a = figure.add_subplot(111)#to jest jeden z wykresów
-                df.plot(kind="bar",ax=a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                x = df.plot(kind="bar",ax=a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
                 #znajdzie się mój wykres w tym przypadku w "a"
                 #potem renderuje go za pomoca
 
@@ -139,6 +154,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                self.text_c.configure(state='normal')
 
             elif self.ratio_var.get() == 1:
 
