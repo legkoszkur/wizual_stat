@@ -5,7 +5,7 @@ from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
 
 
-class Kurtosis:
+class SkewnessKurtosis:  # todo tutuaj będzie okienko do tworzenia wykresów
     def __init__(self, master, data):
         self.master = master
         self.data = data
@@ -18,12 +18,12 @@ class Kurtosis:
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Kurtosis", relief="flat")
+        self.stat_lf = tk.LabelFrame(self.master, text="Skewness", relief="flat")
         self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
 
         self.ch1 = tk.StringVar()
-        self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Kurtosis", variable=self.ch1,
-                                    onvalue="Kurtosis", tristatevalue=0, )
+        self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Skewness", variable=self.ch1,
+                                    onvalue="Skewness", tristatevalue=0, )
         self.ch_b1.grid(row=0, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
@@ -37,7 +37,7 @@ class Kurtosis:
         self.text_lf1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
-        # warp word powoduje że przenosi całe słowo do następnej linijki
+
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
@@ -72,11 +72,11 @@ class Kurtosis:
             self.input_var = self.input_var[:-1]
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.check_b_l = [self.ch1.get(), ]
+        self.check_b_l = [self.ch1.get(),]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
-        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 3, )
+        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
         if self.check_list is True:
             # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
@@ -119,7 +119,7 @@ class Kurtosis:
                 self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                 self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                 self.text_stat.configure(state='normal')
-                self.text_stat.insert(tk.END, self.statistical_backend.kurtosis_df)
+                self.text_stat.insert(tk.END, self.statistical_backend.skewness_df)
                 self.text_stat.configure(state='disabled')
 
         else:

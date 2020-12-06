@@ -2,8 +2,7 @@ import tkinter as tk
 from Window_simple_graphics import Graphics
 from Window_Average_measures import Average_measures
 from Window_Differentation_measures import DifferentationMeasures
-from Window_skewness import Skewness
-from Window_kurtosis import Kurtosis
+from Window_skewness_kurtosis import SkewnessKurtosis
 from Window_models import Models
 from Window_settings import Settings
 from Window_popup_message import popup_window
@@ -44,8 +43,7 @@ class StartPage:
         graph.add_command(label="Correlation", command=lambda: self.new_window(Correlation))
         stat.add_command(label="Average measures", command=lambda: self.new_window(Average_measures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentationMeasures))
-        stat.add_command(label="Skewness", command=lambda: self.new_window(Skewness))
-        stat.add_command(label="Kurtosis", command=lambda: self.new_window(Kurtosis))
+        stat.add_command(label="Skewness", command=lambda: self.new_window(SkewnessKurtosis))
         models.add_command(label="Models", command=lambda: self.new_window(Models))
         tut.add_command(label="Tutorials", command=lambda: print("here will be some youtube tutorials"))
 

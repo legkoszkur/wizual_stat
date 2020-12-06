@@ -107,6 +107,9 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
             self.c_chooser = colorchooser.askcolor()
             self.my_color = self.c_chooser[1]  # chosen color
             self.index_of_variable = self.input_var.index(self.text_c.get())  # color index
+
+            #self.bar_g[self.index_of_variable].set_color(self.my_color)
+
             self.text_c.configure(state='normal')
         else:
             popup_window("Warning","Please insert correct variable name.")
@@ -143,14 +146,15 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                df = self.statistical_backend.average_measures_df
-                figure = plt.figure()#figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
-                a = figure.add_subplot(111)#to jest jeden z wykresów
-                x = df.plot(kind="bar",ax=a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                self.df = self.statistical_backend.average_measures_df
+                self.figure = plt.figure()#figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
+                self.a = self.figure.add_subplot(111)#to jest jeden z wykresów
+                self.bar_g = self.df.plot(kind="bar",ax=self.a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+
                 #znajdzie się mój wykres w tym przypadku w "a"
                 #potem renderuje go za pomoca
 
-                canvas = FigureCanvasTkAgg(figure, master=self.graph_f)
+                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)

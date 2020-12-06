@@ -21,8 +21,6 @@ class StatisticBackend:
         self.skewness_id = ["Skewness"]
         self.kurtosis_id = ["Kurtosis"]
 
-
-
         if self.wish == 0:
             for i in self.input_var:
                 self.average_m_l.append([
@@ -34,11 +32,6 @@ class StatisticBackend:
 
             self.average_measures_df = self.average_measures_df.loc[self.input_stat]
             self.average_measures_df = self.average_measures_df.round(decimals=4)
-
-
-
-
-
 
         elif self.wish == 1:
             for i in self.input_var:
@@ -55,14 +48,7 @@ class StatisticBackend:
 
         elif self.wish == 2:
             for i in self.input_var:
-                self.skewness_l.append([skew(self.data[i])])  # Pearson
+                self.skewness_l.append([skew(self.data[i]),kurtosis(self.data[i])])  # Pearson
             self.skewness_df = pd.DataFrame(np.transpose(self.skewness_l),
                                             index=self.skewness_id, columns=self.input_var)
             self.skewness_df = self.skewness_df.loc[self.input_stat]
-
-        elif self.wish == 3:
-            for i in self.input_var:
-                self.kurtosis_l.append([kurtosis(self.data[i])])  # Pearson?~
-            self.kurtosis_df = pd.DataFrame(np.transpose(self.kurtosis_l,
-                index=self.kurtosis_id, columns=self.input_var))
-            self.kurtosis_df = self.kurtosis_df.loc[self.input_stat]

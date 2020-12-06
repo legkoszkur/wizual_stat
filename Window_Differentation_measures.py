@@ -1,5 +1,5 @@
 import tkinter as tk
-from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
@@ -90,13 +90,12 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.check_list = all(item in self.variables for item in self.input_var)
 
         self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(),]
-        # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
         self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
 
         if self.check_list is True:
-            # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
+
 
             if self.ratio_var.get() == 0:
                 if self.widget:
@@ -108,18 +107,16 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                f = Figure(figsize=(5, 5), dpi=100)
-                a = f.add_subplot(111)
-                order_numbers = []
+                self.df = self.statistical_backend.differentiation_measures_df
+                self.figure = plt.figure()
+                self.a = self.figure.add_subplot(111)
+                self.bar_g = self.df.plot(kind="bar", ax=self.a)
 
-                for i in range(len(self.data[self.input_var])):
-                    order_numbers.append(i)
-                a.plot(order_numbers, self.data[self.input_var])
-
-                canvas = FigureCanvasTkAgg(f, master=self.graph_f)
+                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
 
             elif self.ratio_var.get() == 1:
 
