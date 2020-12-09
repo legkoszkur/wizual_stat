@@ -111,18 +111,40 @@ class SkewnessKurtosis:
                     self.text_stat.destroy()
 
                 self.df = self.data[self.input_var]
+                self.mean = np.mean(self.df)[0]
+                self.median = np.median(self.df)
+                self.dominant = self.df.mode(dropna=False).iloc[0][0]
+
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
                 self.bar_g = sns.distplot(self.df, ax=self.a, color='darkseagreen',bins=int(len(self.data[self.input_var])/3))
                 # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
-                plt.legend(loc="upper left")
+                self.a.legend(loc="upper left")
                 plt.xlabel("values", labelpad=5)
                 plt.ylabel("frequency", labelpad=5)
                 plt.title("Histogram")
-                canvas = FigureCanvasTkAgg(self.figure , master=self.graph_f)
+
+                self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
+                min_ylim, max_ylim = plt.ylim()
+                plt.text(self.mean * 1.1, max_ylim * 0.9, 'Mean: {:.2f}'.format(self.mean),color='y',)
+
+                self.a.axvline(self.median, color='r', linestyle='dashed', linewidth=1)
+                min_ylim, max_ylim = plt.ylim()
+                plt.text(self.median * 1.1, max_ylim * 0.85, 'Median: {:.2f}'.format(self.median),color='r',)
+
+                self.a.axvline(self.dominant , color='b', linestyle='dotted', linewidth=1)
+                min_ylim, max_ylim = plt.ylim()
+                plt.text(self.dominant * 1.1, max_ylim * 0.8, 'Dominant: {:.2f}'.format(self.dominant ),color='b',)
+
+
+
+                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+
+
                 #todo tutaj jest kilka rzeczy do zrobienie
                 #1. zrobić żeby wykres był dokładniejszy
                 #2. zrobić opcje dodawania sredniej itp
