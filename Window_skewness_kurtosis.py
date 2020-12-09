@@ -1,5 +1,6 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
@@ -19,18 +20,31 @@ class SkewnessKurtosis:
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Skewness", relief="flat")
+        self.stat_lf = tk.LabelFrame(self.master, text="Statistics", relief="flat")
         self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
+        self.ch3 = tk.StringVar()
+        self.ch4 = tk.StringVar()
+        self.ch5 = tk.StringVar()
+
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Skewness", variable=self.ch1,
                                     onvalue="Skewness", tristatevalue=0, )
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Kurtosis", variable=self.ch2,
                                     onvalue="Kurtosis", tristatevalue=0, )
+        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch3,
+                                    onvalue="Mean", tristatevalue=0, )
+        self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch4,
+                                    onvalue="Median", tristatevalue=0, )
+        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch5,
+                                    onvalue="Dominant", tristatevalue=0, )
 
         self.ch_b1.grid(row=0, sticky="W")
         self.ch_b2.grid(row=1, sticky="W")
+        self.ch_b3.grid(row=2, sticky="W")
+        self.ch_b4.grid(row=3, sticky="W")
+        self.ch_b5.grid(row=4, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -49,8 +63,8 @@ class SkewnessKurtosis:
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master, text="Variables on graph", relief="flat")
-        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
+        self.text_lf2 = tk.LabelFrame(self.master, text="Variable on graph (Max 1)", relief="flat")
+        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.08)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
@@ -96,15 +110,15 @@ class SkewnessKurtosis:
                 if self.text_stat:
                     self.text_stat.destroy()
 
-                print(self.data)
-
-
                 self.df = self.data[self.input_var]
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
-                self.bar_g = sns.distplot(self.df,ax=self.a, color='darkseagreen')# tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
-                plt.xlabel("values", labelpad=15)
-                plt.ylabel("frequency", labelpad=15)
+                self.bar_g = sns.distplot(self.df, ax=self.a, color='darkseagreen',bins=int(len(self.data[self.input_var])/3))
+                # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                plt.legend(loc="upper left")
+                plt.xlabel("values", labelpad=5)
+                plt.ylabel("frequency", labelpad=5)
+                plt.title("Histogram")
                 canvas = FigureCanvasTkAgg(self.figure , master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
