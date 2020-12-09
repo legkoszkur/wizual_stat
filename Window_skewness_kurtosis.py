@@ -120,11 +120,13 @@ class SkewnessKurtosis:
                 self.median = np.median(self.df)
                 self.dominant = self.df.mode(dropna=False).iloc[0][0]
 
-
                 if self.ch6.get() == "Density":
                     self.kde_value = True
                 else:
                     self.kde_value = False
+                    #todo zmienić na wprowadzanie jendna zmienne to histogram/ wiele zmiennych to multi wykres z kreskami
+                    # dostosować do tego wprodzanie
+                    # https://blog.quantinsti.com/kurtosis/
 
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
@@ -135,8 +137,6 @@ class SkewnessKurtosis:
                 plt.xlabel("values", labelpad=2)
                 plt.ylabel("frequency", labelpad=2)
                 plt.title("Histogram")
-
-
 
                 if self.ch3.get() == "Mean":
                     self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
