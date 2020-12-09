@@ -128,14 +128,15 @@ class SkewnessKurtosis:
 
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
-                self.bar_g = sns.distplot(self.df, ax=self.a,kde=self.kde_value, color='darkseagreen',)
+                self.bar_g = sns.distplot(self.df, ax=self.a,kde=self.kde_value,rug=True, color='darkseagreen',)
                 #bins=int(len(self.data[self.input_var])/3)
                 # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                self.a.legend(loc="upper left")
                 plt.xlabel("values", labelpad=2)
                 plt.ylabel("frequency", labelpad=2)
                 plt.title("Histogram")
 
-                self.a.legend(loc="upper left")
+
 
                 if self.ch3.get() == "Mean":
                     self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
