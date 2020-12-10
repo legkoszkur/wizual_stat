@@ -2,6 +2,7 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import math
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
@@ -51,6 +52,7 @@ class SkewnessKurtosis:
         self.ch_b5.grid(row=4, sticky="W")
         self.ch_b6.grid(row=5, sticky="W")
 
+
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
 
@@ -68,10 +70,10 @@ class SkewnessKurtosis:
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master, text="Variable on graph (Max 1)", relief="flat")
-        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.08)
-        self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
-        self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
+        self.entry_lf2 = tk.LabelFrame(self.master, text="Variable on graph (Max 1)", relief="flat")
+        self.entry_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.08)
+        self.entry_2 = tk.Entry(self.entry_lf2, bd=4, relief="groove",)
+        self.entry_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
         self.options_lf = tk.LabelFrame(self.master, text="Options")
         self.options_lf.place(relx=0.005, rely=0.91, relwidth=0.185, relheight=0.08)
@@ -89,7 +91,7 @@ class SkewnessKurtosis:
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.text_2.get("1.0", "end")
+        self.input_var = self.entry_2.get()
         self.input_var = self.input_var.split(" ")
         self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
         self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
@@ -100,7 +102,6 @@ class SkewnessKurtosis:
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
-        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
         if self.check_list is True:
 
@@ -130,7 +131,7 @@ class SkewnessKurtosis:
 
                 self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                 self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
-                self.bar_g = sns.distplot(self.df, ax=self.a,kde=self.kde_value,rug=True, color='darkseagreen',)
+                sns.distplot(self.df, ax=self.a, kde=self.kde_value, rug=True, color='darkseagreen',)
                 #bins=int(len(self.data[self.input_var])/3)
                 # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
                 self.a.legend(loc="upper left")
@@ -167,6 +168,8 @@ class SkewnessKurtosis:
 
 
             elif self.ratio_var.get() == 1:
+                
+                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
                 if self.widget:
                     self.widget.destroy()

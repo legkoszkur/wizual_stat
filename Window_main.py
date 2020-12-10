@@ -56,7 +56,7 @@ class StartPage:
         self.master.config(menu=menubar)
 
         buttons_frame = tk.LabelFrame(self.master, bg="white", text="Data setings")
-        buttons_frame.place(relx=0.005, rely=0.76, relwidth=0.99, relheight=0.2)
+        buttons_frame.place(relx=0.005, rely=0.76, relwidth=0.99, relheight=0.18)
 
         Import_data = tk.Button(buttons_frame, text="Import", command=lambda: self.data_manager.File_dialog())
         Import_data.place(relx=0.1, rely=0.1, relheight=0.6, relwidth=0.1)

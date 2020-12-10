@@ -20,7 +20,7 @@ class Data_manager:
         y_scrollbar.pack(side="right",fill="y")
 
         self.path_label = tk.Label(master, bg="red", text="No File Selected.")
-        self.path_label.place(relx=0.005, rely=0.97, relwidth=0.99, relheight=0.02)
+        self.path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
 
     def File_dialog(self):
         try:
