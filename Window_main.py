@@ -22,6 +22,7 @@ class StartPage:
         self.master = master
         self.master.geometry("1000x600")
         self.master.resizable(False, False)
+        self.master.configure(bg="white")
 
         data_frame = tk.LabelFrame(self.master, bg="white", text="Data Frame")
         data_frame.place(relx=0.005, rely=0.01, relwidth=0.99, relheight=0.74)

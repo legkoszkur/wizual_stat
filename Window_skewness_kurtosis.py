@@ -70,10 +70,10 @@ class SkewnessKurtosis:
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.entry_lf2 = tk.LabelFrame(self.master, text="Variable on graph (Max 1)", relief="flat")
-        self.entry_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.08)
-        self.entry_2 = tk.Entry(self.entry_lf2, bd=4, relief="groove",)
-        self.entry_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
+        self.text_lf2 = tk.LabelFrame(self.master, text="Chosen variables", relief="flat")
+        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
+        self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
+        self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
         self.options_lf = tk.LabelFrame(self.master, text="Options")
         self.options_lf.place(relx=0.005, rely=0.91, relwidth=0.185, relheight=0.08)
@@ -91,14 +91,14 @@ class SkewnessKurtosis:
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.entry_2.get()
+        self.input_var = self.text_2.get()
         self.input_var = self.input_var.split(" ")
         self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
         self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
         if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
             self.input_var = self.input_var[:-1]
         self.check_list = all(item in self.variables for item in self.input_var)
-        self.check_b_l = [self.ch1.get(),self.ch2.get()]
+        self.check_b_l = [self.ch1.get(),self.ch2.get(),self.ch3.get(),self.ch4.get(),self.ch5.get()]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
@@ -157,18 +157,8 @@ class SkewnessKurtosis:
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
-
-
-                #todo tutaj jest kilka rzeczy do zrobienie
-                #1. zrobić żeby wykres był dokładniejszy
-                #2. zrobić opcje dodawania sredniej itp
-                #3. zrobić żeby można było zmieniać skew i kurt
-                #https://dfrieds.com/math/skewness.html
-                #https://seaborn.pydata.org/generated/seaborn.distplot.html
-
-
             elif self.ratio_var.get() == 1:
-                
+
                 self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
                 if self.widget:

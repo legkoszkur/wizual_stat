@@ -17,7 +17,7 @@ class StatisticBackend:
         self.average_m_id = ['Sum', 'Mean', "Max", "Min", "Median", "Quantile_25", "Quantile_75", "Dominant"]
         self.differentiation_m_id = ["Standard deviation", "Coefficient of variation", "Range",
                                      "Interquartile range", "Quarterly deviation", ]
-        self.skew_kurt_id = ["Skewness", "Kurtosis"]
+        self.skew_kurt_id = ["Skewness", "Kurtosis", 'Mean', "Median","Dominant"]
 
         if self.wish == 0:
             for i in self.input_var:
@@ -46,7 +46,8 @@ class StatisticBackend:
 
         elif self.wish == 2:
             for i in self.input_var:
-                self.skew_kurt_l.append([skew(self.data[i]), kurtosis(self.data[i])])  # Pearson
+                self.skew_kurt_l.append([skew(self.data[i]), kurtosis(self.data[i]), np.mean(self.data[i]),
+                                         np.quantile(self.data[i], q=0.5), self.data[i].mode(dropna=False)[0], ])  # Pearson
             self.skew_kurt_df = pd.DataFrame(np.transpose(self.skew_kurt_l),
                                              index=self.skew_kurt_id, columns=self.input_var)
             self.skew_kurt_df = self.skew_kurt_df.loc[self.input_stat]

@@ -160,42 +160,4 @@
     <MESSAGE value="conection bettwen statistic class and average measures established" />
     <option name="LAST_COMMIT_MESSAGE" value="conection bettwen statistic class and average measures established" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="254" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606754913840">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="254" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606754913840" />
-    <state x="530" y="175" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607278155956">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="530" y="175" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607278155956" />
-    <state width="1578" height="159" key="GridCell.Tab.0.bottom" timestamp="1607631517495">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state width="1898" height="205" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
-    <state width="1578" height="159" key="GridCell.Tab.0.bottom/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607631517495" />
-    <state width="1578" height="159" key="GridCell.Tab.0.center" timestamp="1607631517494">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state width="1898" height="205" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
-    <state width="1578" height="159" key="GridCell.Tab.0.center/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607631517494" />
-    <state width="1578" height="159" key="GridCell.Tab.0.left" timestamp="1607631517494">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state width="1898" height="205" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
-    <state width="1578" height="159" key="GridCell.Tab.0.left/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607631517494" />
-    <state width="1578" height="159" key="GridCell.Tab.0.right" timestamp="1607631517494">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state width="1898" height="205" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@-1920.-78.1920.1040" timestamp="1607192542162" />
-    <state width="1578" height="159" key="GridCell.Tab.0.right/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607631517494" />
-    <state x="301" y="60" key="SettingsEditor" timestamp="1606754906007">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="301" y="60" key="SettingsEditor/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1606754906007" />
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1607195300180">
-      <screen x="0" y="0" width="1600" height="860" />
-    </state>
-    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860/-1920.-78.1920.1040@0.0.1600.860" timestamp="1607195300180" />
-  </component>
 </project>

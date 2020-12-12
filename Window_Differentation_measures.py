@@ -51,7 +51,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
 
         self.variables = list(data.columns)
 
-        self.text_lf1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
+        self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
         # warp word powoduje że przenosi całe słowo do następnej linijki
@@ -60,7 +60,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master, bg="white", text="Variables on graph", relief="flat")
+        self.text_lf2 = tk.LabelFrame(self.master,text="Chosen variables", relief="flat")
         self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
