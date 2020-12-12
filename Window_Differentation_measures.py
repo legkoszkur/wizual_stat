@@ -96,8 +96,8 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
 
         if self.check_list is True:
 
-
             if self.ratio_var.get() == 0:
+
                 if self.widget:
                     self.widget.destroy()
 

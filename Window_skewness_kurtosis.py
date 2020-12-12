@@ -32,9 +32,9 @@ class SkewnessKurtosis:
         self.ch6 = tk.StringVar()
 
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Skewness", variable=self.ch1,
-                                    onvalue="Skewness", tristatevalue=0, )
+                                    onvalue="Skewness", tristatevalue=0, state="disable", )
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Kurtosis", variable=self.ch2,
-                                    onvalue="Kurtosis", tristatevalue=0, )
+                                    onvalue="Kurtosis", tristatevalue=0, state="disable", )
         self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch3,
                                     onvalue="Mean", tristatevalue=0, )
         self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch4,
@@ -42,8 +42,7 @@ class SkewnessKurtosis:
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch5,
                                     onvalue="Dominant", tristatevalue=0, )
         self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Density", variable=self.ch6,
-                                    onvalue="Density", tristatevalue=0, )
-
+                                    onvalue="Density", tristatevalue=0, state="disable", )
 
         self.ch_b1.grid(row=0, sticky="W")
         self.ch_b2.grid(row=1, sticky="W")
@@ -51,7 +50,6 @@ class SkewnessKurtosis:
         self.ch_b4.grid(row=3, sticky="W")
         self.ch_b5.grid(row=4, sticky="W")
         self.ch_b6.grid(row=5, sticky="W")
-
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -83,6 +81,8 @@ class SkewnessKurtosis:
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
+
+
         self.widget = None
         self.toolbar = None
         self.text_stat = None
@@ -91,7 +91,7 @@ class SkewnessKurtosis:
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.text_2.get()
+        self.input_var = self.text_2.get("1.0", "end")
         self.input_var = self.input_var.split(" ")
         self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
         self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
@@ -106,6 +106,7 @@ class SkewnessKurtosis:
         if self.check_list is True:
 
             if self.ratio_var.get() == 0:
+                self.ch_b6.config(state="normal")
 
                 if self.widget:
                     self.widget.destroy()
@@ -125,19 +126,15 @@ class SkewnessKurtosis:
                     self.kde_value = True
                 else:
                     self.kde_value = False
-                    #todo zmienić na wprowadzanie jendna zmienne to histogram/ wiele zmiennych to multi wykres z kreskami
-                    # dostosować do tego wprodzanie
-                    # https://blog.quantinsti.com/kurtosis/
 
-                self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
-                self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
+                self.figure = plt.figure()
+                self.a = self.figure.add_subplot(111)
                 sns.distplot(self.df, ax=self.a, kde=self.kde_value, rug=True, color='darkseagreen',)
-                #bins=int(len(self.data[self.input_var])/3)
-                # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
-                self.a.legend(loc="upper left")
+                self.a.legend(loc="upper left",labels=self.input_var,)
                 plt.xlabel("values", labelpad=2)
                 plt.ylabel("frequency", labelpad=2)
                 plt.title("Histogram")
+                plt.grid()
 
                 if self.ch3.get() == "Mean":
                     self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
@@ -158,6 +155,7 @@ class SkewnessKurtosis:
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
             elif self.ratio_var.get() == 1:
+                self.ch_b6.config(state="disable")
 
                 self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
