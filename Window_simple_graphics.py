@@ -23,7 +23,6 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
         self.refresh_b = tk.Button(self.menu_f, text="Load", command=lambda: self.chosen_data_insert())
         self.refresh_b.place(relx=0.5, rely=0.1, relwidth=0.3, relheight=0.8)
 
-        # Here im importing data from Window_main
         self.variables = list(data.columns)
 
         self.text_l1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")

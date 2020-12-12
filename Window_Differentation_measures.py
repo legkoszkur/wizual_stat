@@ -81,62 +81,75 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.master.destroy()
 
     def chosen_data_insert(self):
+
         self.input_var = self.text_2.get("1.0", "end")
         self.input_var = self.input_var.split(" ")
+
         self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
         self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
         if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
             self.input_var = self.input_var[:-1]
+
         self.check_list = all(item in self.variables for item in self.input_var)
 
         self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(),]
         self.check_b_l = [x for x in self.check_b_l if x]
 
-        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
+        if self.check_b_l:
 
-        if self.check_list is True:
+            if self.input_var:
 
-            if self.ratio_var.get() == 0:
+                if self.check_list:
 
-                if self.widget:
-                    self.widget.destroy()
+                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                    if self.ratio_var.get() == 0:
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                        if self.text_stat:
+                            self.text_stat.destroy()
 
-                self.df = self.statistical_backend.differentiation_measures_df
-                self.figure = plt.figure()
-                self.a = self.figure.add_subplot(111)
-                self.bar_g = self.df.plot(kind="bar", ax=self.a)
+                        if self.widget:
+                            self.widget.destroy()
 
-                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-                self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-                self.widget = canvas.get_tk_widget()
-                self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        if self.toolbar:
+                            self.toolbar.destroy()
 
+                        self.df = self.statistical_backend.differentiation_measures_df
+                        self.figure = plt.figure()
+                        self.a = self.figure.add_subplot(111)
+                        self.bar_g = self.df.plot(kind="bar", ax=self.a)
 
-            elif self.ratio_var.get() == 1:
+                        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+                        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+                        self.widget = canvas.get_tk_widget()
+                        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
-                if self.widget:
-                    self.widget.destroy()
+                    elif self.ratio_var.get() == 1:
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                        if self.widget:
+                            self.widget.destroy()
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                        if self.toolbar:
+                            self.toolbar.destroy()
 
-                self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-                self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                self.text_stat.configure(state='normal')
-                self.text_stat.insert(tk.END, self.statistical_backend.differentiation_measures_df)
-                self.text_stat.configure(state='disabled')
+                        if self.text_stat:
+                            self.text_stat.destroy()
 
+                        self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
+                        self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        self.text_stat.configure(state='normal')
+                        self.text_stat.insert(tk.END, self.statistical_backend.differentiation_measures_df)
+                        self.text_stat.configure(state='disabled')
+                        self.widget = None
+                        self.toolbar = None
+                else:
+                    popup_window("Information", "Incorrect variable name!")
+            else:
+                popup_window("Information", "No variables entered.")
         else:
-            popup_window("Information", "Incorrect variable name!")
+            popup_window("Information", "No statistic chosen.")
+
+
 
 
 

@@ -126,59 +126,69 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
             self.input_var = self.input_var[:-1]
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.input_stat_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(), self.ch6.get(),
-                             self.ch7.get(), self.ch8.get(), ]
+        self.input_s_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(), self.ch6.get(),
+                          self.ch7.get(), self.ch8.get(), ]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
-        self.input_stat_l = [x for x in self.input_stat_l if x]
+        self.input_s_l = [x for x in self.input_s_l if x]
 
-        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_stat_l, 0, )
 
-        if self.check_list is True:
-            # to sprawdza czy wszystkie wprowadzone zmienne sa poprawne
+        if self.input_s_l:
 
-            if self.ratio_var.get() == 0:
-                if self.widget:
-                    self.widget.destroy()
+            if self.input_var:
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                if self.check_list:
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_s_l, 0, )
 
-                self.df = self.statistical_backend.average_measures_df
-                self.figure = plt.figure()#figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
-                self.a = self.figure.add_subplot(111)#to jest jeden z wykresów
-                self.bar_g = self.df.plot(kind="bar",ax=self.a) #tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                    if self.ratio_var.get() == 0:
+                        if self.widget:
+                            self.widget.destroy()
 
-                #znajdzie się mój wykres w tym przypadku w "a"
-                #potem renderuje go za pomoca
+                        if self.toolbar:
+                            self.toolbar.destroy()
 
-                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-                self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-                self.widget = canvas.get_tk_widget()
-                self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                self.text_c.configure(state='normal')
+                        if self.text_stat:
+                            self.text_stat.destroy()
 
-            elif self.ratio_var.get() == 1:
+                        self.df = self.statistical_backend.average_measures_df
+                        self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
+                        self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
+                        self.bar_g = self.df.plot(kind="bar",
+                                                  ax=self.a)  # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
 
-                if self.widget:
-                    self.widget.destroy()
+                        # znajdzie się mój wykres w tym przypadku w "a"
+                        # potem renderuje go za pomoca
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+                        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+                        self.widget = canvas.get_tk_widget()
+                        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        self.text_c.configure(state='normal')
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                    elif self.ratio_var.get() == 1:
 
-                self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-                self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                self.text_stat.configure(state='normal')
-                self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
-                self.text_stat.configure(state='disabled')
+                        if self.widget:
+                            self.widget.destroy()
 
+                        if self.toolbar:
+                            self.toolbar.destroy()
+
+                        if self.text_stat:
+                            self.text_stat.destroy()
+
+                        self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
+                        self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        self.text_stat.configure(state='normal')
+                        self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
+                        self.text_stat.configure(state='disabled')
+                        self.widget = None
+                        self.toolbar = None
+                else:
+                    popup_window("Information", "Incorrect variable name!")
+            else:
+                popup_window("Information", "No variables entered.")
         else:
-            popup_window("Information", "Incorrect variable name!")
+            popup_window("Information", "No statistic chosen.")
 
 
 

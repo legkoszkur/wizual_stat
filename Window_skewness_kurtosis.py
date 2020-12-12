@@ -32,17 +32,22 @@ class SkewnessKurtosis:
         self.ch6 = tk.StringVar()
 
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Skewness", variable=self.ch1,
-                                    onvalue="Skewness", tristatevalue=0, state="disable", )
+                                    onvalue="Skewness", offvalue='', tristatevalue=0, state="disable", )
+
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Kurtosis", variable=self.ch2,
-                                    onvalue="Kurtosis", tristatevalue=0, state="disable", )
+                                    onvalue="Kurtosis", offvalue='', tristatevalue=0, state="disable", )
+
         self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch3,
-                                    onvalue="Mean", tristatevalue=0, )
+                                    onvalue="Mean", offvalue='', tristatevalue=0, )
+
         self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch4,
-                                    onvalue="Median", tristatevalue=0, )
+                                    onvalue="Median", offvalue='', tristatevalue=0, )
+
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch5,
-                                    onvalue="Dominant", tristatevalue=0, )
+                                    onvalue="Dominant", offvalue='', tristatevalue=0, )
+
         self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Density", variable=self.ch6,
-                                    onvalue="Density", tristatevalue=0, state="disable", )
+                                    onvalue="Density", offvalue='', tristatevalue=0, state="disable", )
 
         self.ch_b1.grid(row=0, sticky="W")
         self.ch_b2.grid(row=1, sticky="W")
@@ -102,80 +107,104 @@ class SkewnessKurtosis:
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
 
+        if self.input_var:
 
-        if self.check_list is True:
+            if self.check_list:
 
-            if self.ratio_var.get() == 0:
-                self.ch_b6.config(state="normal")
+                if self.ratio_var.get() == 0:
+                    if len(self.input_var) == 1:
+                        self.ch_b6.config(state="normal")
+                        self.ch_b1.config(offvalue='', )
+                        self.ch_b2.config(offvalue='', )
 
-                if self.widget:
-                    self.widget.destroy()
+                        if self.widget:
+                            self.widget.destroy()
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                        if self.toolbar:
+                            self.toolbar.destroy()
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                        if self.text_stat:
+                            self.text_stat.destroy()
 
-                self.df = self.data[self.input_var]
-                self.mean = np.mean(self.df)[0]
-                self.median = np.median(self.df)
-                self.dominant = self.df.mode(dropna=False).iloc[0][0]
+                        self.df = self.data[self.input_var]
+                        self.mean = np.mean(self.df)[0]
+                        self.median = np.median(self.df)
+                        self.dominant = self.df.mode(dropna=False).iloc[0][0]
 
-                if self.ch6.get() == "Density":
-                    self.kde_value = True
-                else:
-                    self.kde_value = False
+                        if self.ch6.get() == "Density":
+                            self.kde_value = True
+                        else:
+                            self.kde_value = False
 
-                self.figure = plt.figure()
-                self.a = self.figure.add_subplot(111)
-                sns.distplot(self.df, ax=self.a, kde=self.kde_value, rug=True, color='darkseagreen',)
-                self.a.legend(loc="upper left",labels=self.input_var,)
-                plt.xlabel("values", labelpad=2)
-                plt.ylabel("frequency", labelpad=2)
-                plt.title("Histogram")
-                plt.grid()
+                        self.figure = plt.figure()
+                        self.a = self.figure.add_subplot(111)
+                        sns.distplot(self.df, ax=self.a, kde=self.kde_value, rug=True, color='darkseagreen', )
+                        self.a.legend(loc="upper left", labels=self.input_var, )
+                        plt.xlabel("values", labelpad=2)
+                        plt.ylabel("frequency", labelpad=2)
+                        plt.title("Histogram")
+                        plt.grid()
 
-                if self.ch3.get() == "Mean":
-                    self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
-                    min_ylim, max_ylim = plt.ylim()
-                    plt.text(self.mean * 1.1, max_ylim * 0.9, 'Mean: {:.2f}'.format(self.mean), color='y', )
-                if self.ch4.get() == "Median":
-                    self.a.axvline(self.median, color='r', linestyle='dashed', linewidth=1)
-                    min_ylim, max_ylim = plt.ylim()
-                    plt.text(self.median * 1.1, max_ylim * 0.85, 'Median: {:.2f}'.format(self.median), color='r', )
-                if self.ch5.get() == "Dominant":
-                    self.a.axvline(self.dominant, color='b', linestyle='dotted', linewidth=1)
-                    min_ylim, max_ylim = plt.ylim()
-                    plt.text(self.dominant * 1.1, max_ylim * 0.8, 'Dominant: {:.2f}'.format(self.dominant), color='b', )
+                        if self.ch3.get() == "Mean":
+                            self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
+                            min_ylim, max_ylim = plt.ylim()
+                            plt.text(self.mean * 1.1, max_ylim * 0.9, 'Mean: {:.2f}'.format(self.mean), color='y', )
+                        if self.ch4.get() == "Median":
+                            self.a.axvline(self.median, color='r', linestyle='dashed', linewidth=1)
+                            min_ylim, max_ylim = plt.ylim()
+                            plt.text(self.median * 1.1, max_ylim * 0.85, 'Median: {:.2f}'.format(self.median),
+                                     color='r', )
+                        if self.ch5.get() == "Dominant":
+                            self.a.axvline(self.dominant, color='b', linestyle='dotted', linewidth=1)
+                            min_ylim, max_ylim = plt.ylim()
+                            plt.text(self.dominant * 1.1, max_ylim * 0.8, 'Dominant: {:.2f}'.format(self.dominant),
+                                     color='b', )
 
-                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-                self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-                self.widget = canvas.get_tk_widget()
-                self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+                        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+                        self.widget = canvas.get_tk_widget()
+                        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                    else:
+                        popup_window("Information", "Only one variable can be displayed.")
+                        pass
 
             elif self.ratio_var.get() == 1:
-                self.ch_b6.config(state="disable")
+                    if self.check_b_l:
 
-                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
+                        self.ch_b6.config(state="disable", )
+                        self.ch_b1.config(state="normal", )
+                        self.ch_b2.config(state="normal", )
 
-                if self.widget:
-                    self.widget.destroy()
+                        self.ch_b6.config(offvalue='', )
+                        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
-                if self.toolbar:
-                    self.toolbar.destroy()
+                        if self.widget:
+                            self.widget.destroy()
 
-                if self.text_stat:
-                    self.text_stat.destroy()
+                        if self.toolbar:
+                            self.toolbar.destroy()
 
-                self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-                self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                self.text_stat.configure(state='normal')
-                self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
-                self.text_stat.configure(state='disabled')
+                        if self.text_stat:
+                            self.text_stat.destroy()
 
+                        self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
+                        self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                        self.text_stat.configure(state='normal')
+                        self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
+                        self.text_stat.configure(state='disabled')
+                        self.widget = None
+                        self.toolbar = None
+                    else:
+                        popup_window("Information", "No statistic chosen.")
+            else:
+                popup_window("Information", "Incorrect variable name!")
         else:
-            popup_window("Information", "Incorrect variable name!")
+            popup_window("Information", "No variables entered.")
+
+
+
+
+
 
 
 
