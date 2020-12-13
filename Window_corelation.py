@@ -25,7 +25,7 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.variables = list(data.columns)
 
-        self.text_l1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
+        self.text_l1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_l1.place(relx=0.76, rely=0.01, relwidth=0.23, relheight=0.45)
         self.text_1 = tk.Text(self.text_l1, bd=4, relief="groove", wrap="word")#warp word powoduje że przenosi całe słowo do następnej linijki
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -33,21 +33,20 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
         self.text_1.insert(tk.END, self.variables)
         self.text_1 .configure(state='disabled')
 
-        self.text_l2 = tk.LabelFrame(self.master, bg="white", text="Variable one", relief="flat")
+        self.text_l2 = tk.LabelFrame(self.master, text="Variable one", relief="flat")
         self.text_l2.place(relx=0.76, rely=0.47, relwidth=0.23, relheight=0.1)
         self.text_2 = tk.Text(self.text_l2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
-        self.text_l3 = tk.LabelFrame(self.master, bg="white", text="Variable two", relief="flat")
+        self.text_l3 = tk.LabelFrame(self.master, text="Variable two", relief="flat")
         self.text_l3.place(relx=0.76, rely=0.58, relwidth=0.23, relheight=0.1)
         self.text_3 = tk.Text(self.text_l3, bd=4, relief="groove", wrap="word")
         self.text_3.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
-        self.text_l4 = tk.LabelFrame(self.master, bg="white", text="Correlation ", relief="flat")
+        self.text_l4 = tk.LabelFrame(self.master,  text="Pearson correlation ", relief="flat")
         self.text_l4.place(relx=0.76, rely=0.69, relwidth=0.23, relheight=0.1)
-        self.text_4 = tk.Entry(self.text_l4, bd=4, relief="groove", )
+        self.text_4 = tk.Text(self.text_l4, bd=4,bg="silver", relief="groove",state='disabled')
         self.text_4.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
-        self.text_4.configure(state='disabled')
 
         self.widget = None
         self.toolbar = None
@@ -61,6 +60,7 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
 
         if self.toolbar:
             self.toolbar.destroy()
+
 
         self.input_var1 = self.text_2.get("1.0", "end")
         self.input_var1 = self.input_var1.split(" ")
@@ -82,17 +82,15 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
         self.widget = canvas.get_tk_widget()
         self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
 
-        print(self.data[self.input_var2])
-        print(self.data[self.input_var1])
-        print(type(self.data[self.input_var1]))
-
-        self.correlation = scipy.stats.pearsonr(self.data.loc[[self.input_var1, self.input_var2]], )
-        print(self.correlation)
-        """
         self.text_4.configure(state='normal')
-        self.text_4.insert(tk.END, self.correlation[0])
+        self.text_4.delete("1.0", "end")
+        self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
+        self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
+        self.text_4.insert(tk.END, round(self.correlation,6))
         self.text_4.configure(state='disabled')
-        """
+
+
+
 
 
 
