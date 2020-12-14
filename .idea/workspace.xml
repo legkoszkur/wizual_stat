@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c9604b01-e3ac-4915-8c91-145e86eb07ee" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Window_corelation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_correlation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Window_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Window_multicorrelation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_multicorrelation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
