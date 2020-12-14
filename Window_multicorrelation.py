@@ -4,7 +4,7 @@ import scipy.stats
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 
-class MultiCorrelation:#todo tutuaj będzie okienko do tworzenia wykresów
+class MultiCorrelation:
     def __init__(self, master,data):
         self.master = master
         self.data = data

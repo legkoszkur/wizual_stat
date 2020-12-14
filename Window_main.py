@@ -6,7 +6,7 @@ from Window_skewness_kurtosis import SkewnessKurtosis
 from Window_models import Models
 from Window_settings import Settings
 from Window_popup_message import popup_window
-from Window_corelation import Correlation
+from Window_correlation import Correlation
 from Window_multicorrelation import MultiCorrelation
 from Class_data_manager import Data_manager
 
