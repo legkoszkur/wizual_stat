@@ -7,6 +7,7 @@ from Window_models import Models
 from Window_settings import Settings
 from Window_popup_message import popup_window
 from Window_corelation import Correlation
+from Window_multicorrelation import MultiCorrelation
 from Class_data_manager import Data_manager
 
 
@@ -42,6 +43,7 @@ class StartPage:
 
         graph.add_command(label="Graphics", command=lambda: self.new_window(Graphics))
         graph.add_command(label="Correlation", command=lambda: self.new_window(Correlation))
+        graph.add_command(label="Multi correlation", command=lambda: self.new_window(MultiCorrelation))
         stat.add_command(label="Average measures", command=lambda: self.new_window(Average_measures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentationMeasures))
         stat.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
