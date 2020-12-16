@@ -13,8 +13,6 @@ class Data_manager:
 
     def __init__(self,master,frame_with_data):
 
-        self.state_for_menu = 'disabled'
-
         self.treeview_style = ttk.Treeview(frame_with_data)
         self.treeview_style.place(relheight=1, relwidth=1)
         y_scrollbar = tk.Scrollbar(frame_with_data, orient="vertical", command=self.treeview_style.yview)
@@ -25,8 +23,6 @@ class Data_manager:
 
         self.path_label = tk.Label(master, bg="red", text="No File Selected.")
         self.path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
-
-        self.state_for_menu = 'disabled'
 
     def file_dialog(self):
         try:
