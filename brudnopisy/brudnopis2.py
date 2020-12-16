@@ -1,18 +1,17 @@
-# Set the figure size - handy for larger output
-import pandas as pd
-from matplotlib import pyplot as plt
+import tkinter as tk
+
+window = tk.Tk()
+
+window.geometry('700x700')
+window.title("Welcome to LikeGeeks app")
+window.state('disabled')
+
+buttons_frame = tk.LabelFrame(window, bg="white", text="Data setings")
+buttons_frame.place(relx=0.005, rely=0.76, relwidth=0.99, relheight=0.18)
+
+Load_data = tk.Button(window, text="Load")
+Load_data.place(relx=0.3, rely=0.1, relheight=0.6, relwidth=0.1)
 
 
 
-
-plotdata = pd.DataFrame({
-    "pies_2018":[40, 12, 10, 26, 36],
-    "pies_2019":[19, 8, 30, 21, 38],
-    "pies_2020":[10, 10, 42, 17, 37]
-    },
-    index=["Dad", "Mam", "Bro", "Sis", "Me"]
-)
-plotdata.plot(kind="bar")
-plt.title("Mince Pie Consumption Study")
-plt.xlabel("Family Member")
-plt.ylabel("Pies Consumed")
+window.mainloop()
