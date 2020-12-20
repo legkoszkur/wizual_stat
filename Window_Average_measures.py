@@ -15,13 +15,13 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.master.resizable(False, False)
 
         self.graph_f = tk.LabelFrame(self.master)
-        self.graph_f.place(relx=0.195, rely=0.01, relwidth=0.61, relheight=0.98)
+        self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
 
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Average Measures", relief="flat")
-        self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
+        self.stat_lf = tk.LabelFrame(self.master, text="Average Measures",)
+        self.stat_lf.place(relx=0.195, rely=0.91, relwidth=0.61, relheight=0.08)
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
@@ -49,14 +49,14 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8,
                                     onvalue="Dominant",offvalue='', tristatevalue=0, )
 
-        self.ch_b1.grid(row=0,column=1, sticky="W")
-        self.ch_b2.grid(row=1,column=1, sticky="W")
-        self.ch_b3.grid(row=2,column=1, sticky="W")
-        self.ch_b4.grid(row=3,column=1, sticky="W")
-        self.ch_b5.grid(row=4,column=1, sticky="W")
-        self.ch_b6.grid(row=5,column=1, sticky="W")
-        self.ch_b7.grid(row=6,column=1, sticky="W")
-        self.ch_b8.grid(row=7,column=1, sticky="W")
+        self.ch_b1.grid(row=0, column=0, sticky="W")
+        self.ch_b2.grid(row=0, column=1, sticky="W")
+        self.ch_b3.grid(row=0, column=2, sticky="W")
+        self.ch_b4.grid(row=0, column=3, sticky="W")
+        self.ch_b5.grid(row=0, column=4, sticky="W")
+        self.ch_b6.grid(row=0, column=5, sticky="W")
+        self.ch_b7.grid(row=0, column=6, sticky="W")
+        self.ch_b8.grid(row=0, column=7, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -67,7 +67,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.variables = list(data.columns)
 
         self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
-        self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
+        self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.45)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
         # warp word powoduje że przenosi całe słowo do następnej linijki
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -76,7 +76,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.text_1 .configure(state='disabled')
 
         self.text_lf2 = tk.LabelFrame(self.master, text="Variables on graph", relief="flat")
-        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
+        self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.45)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
@@ -88,32 +88,9 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
-        self.color_lf = tk.LabelFrame(self.master, text="Change color", )
-        self.color_lf.place(relx=0.005, rely=0.375, relwidth=0.185, relheight=0.08)
-
-        self.type_b = tk.Button(self.color_lf, text="Type", command=lambda: self.color_backend())
-        self.type_b.place(relx=0.05, rely=0.05, relwidth=0.35, relheight=0.8)
-
-        self.text_c = tk.Entry(self.color_lf, bd=4, relief="groove")
-        self.text_c.place(relx=0.45, rely=0.05, relwidth=0.5, relheight=0.88)
-        self.text_c.configure(state='disabled')
-
         self.widget = None
         self.toolbar = None
         self.text_stat = None
-
-    def color_backend(self):
-        if self.text_c.get() in self.input_var:
-            self.text_c.configure(state='disabled')
-            self.c_chooser = colorchooser.askcolor()
-            self.my_color = self.c_chooser[1]  # chosen color
-            self.index_of_variable = self.input_var.index(self.text_c.get())  # color index
-
-            #self.bar_g[self.index_of_variable].set_color(self.my_color)
-
-            self.text_c.configure(state='normal')
-        else:
-            popup_window("Warning","Please insert correct variable name.")
 
     def close_window(self):
         self.master.destroy()
@@ -161,7 +138,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                         self.widget = canvas.get_tk_widget()
                         self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                        self.text_c.configure(state='normal')
+
 
                     elif self.ratio_var.get() == 1:
 

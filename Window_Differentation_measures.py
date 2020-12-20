@@ -14,13 +14,14 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.master.resizable(False, False)
 
         self.graph_f = tk.LabelFrame(self.master)
-        self.graph_f.place(relx=0.195, rely=0.01, relwidth=0.61, relheight=0.98)
+        self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
 
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Differentation Measures", relief="flat")
-        self.stat_lf.place(relx=0.005, rely=0.01, relwidth=0.185, relheight=0.37)
+        self.stat_lf = tk.LabelFrame(self.master, text="Differentation Measures", )
+        self.stat_lf.place(relx=0.195, rely=0.91, relwidth=0.61, relheight=0.08)
+
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
@@ -38,11 +39,11 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Quarter deviation", variable=self.ch5,
                                     onvalue="Quarterly deviation", tristatevalue=0, )
 
-        self.ch_b1.grid(row=0, sticky="W")
-        self.ch_b2.grid(row=1, sticky="W")
-        self.ch_b3.grid(row=2, sticky="W")
-        self.ch_b4.grid(row=3, sticky="W")
-        self.ch_b5.grid(row=4, sticky="W")
+        self.ch_b1.grid(row=0,column=0, sticky="W")
+        self.ch_b2.grid(row=0,column=1, sticky="W")
+        self.ch_b3.grid(row=0,column=2, sticky="W")
+        self.ch_b4.grid(row=0,column=3, sticky="W")
+        self.ch_b5.grid(row=0,column=4, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -53,7 +54,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.variables = list(data.columns)
 
         self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
-        self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
+        self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.45)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
         # warp word powoduje że przenosi całe słowo do następnej linijki
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
