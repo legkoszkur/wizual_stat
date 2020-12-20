@@ -95,6 +95,8 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
             if self.input_var:
 
                 if self.check_list:
+                    #todo naprawić że nie odsiwerza po usunięciu zmiennych
+                    #todo skrócić nazwy zniennych zebt mieściły się na wykresie
 
                     self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
 
@@ -112,7 +114,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
                         self.df = self.statistical_backend.differentiation_measures_df
                         self.figure = plt.figure()
                         self.a = self.figure.add_subplot(111)
-                        self.bar_g = self.df.plot(kind="bar", ax=self.a)
+                        self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
