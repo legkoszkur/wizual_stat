@@ -1,7 +1,6 @@
 import tkinter as tk
-from matplotlib.figure import Figure
 from Function_data_check import data_preparation
-import scipy.stats
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 
@@ -28,7 +27,7 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.text_l1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_l1.place(relx=0.76, rely=0.01, relwidth=0.23, relheight=0.45)
-        self.text_1 = tk.Text(self.text_l1, bd=4, relief="groove", wrap="word")#warp word powoduje że przenosi całe słowo do następnej linijki
+        self.text_1 = tk.Text(self.text_l1, bd=4, relief="groove", wrap="word")
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
@@ -56,32 +55,56 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
         self.master.destroy()
 
     def chosen_data_insert(self):
-        if self.widget:
-            self.widget.destroy()
-
-        if self.toolbar:
-            self.toolbar.destroy()
-
         self.input_var1 = data_preparation(self.text_2.get("1.0", "end"))
         self.input_var2 = data_preparation(self.text_3.get("1.0", "end"))
 
+        self.check_list1 = all(item in self.variables for item in self.input_var1)
+        self.check_list2 = all(item in self.variables for item in self.input_var2)
 
-        f = Figure(figsize=(5, 5), dpi=100)
-        a = f.add_subplot(111)
+        if self.input_var1:
 
-        a.scatter(self.data[self.input_var1], self.data[self.input_var2], )
+            if self.input_var2:
 
-        canvas = FigureCanvasTkAgg(f, master=self.graph_f)
-        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-        self.widget = canvas.get_tk_widget()
-        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                if self.check_list1:
 
-        self.text_4.configure(state='normal')
-        self.text_4.delete("1.0", "end")
-        self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
-        self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
-        self.text_4.insert(tk.END, round(self.correlation,6))
-        self.text_4.configure(state='disabled')
+                    if self.check_list2:
+
+                        if self.widget:
+                            self.widget.destroy()
+
+                        if self.toolbar:
+                            self.toolbar.destroy()
+
+                        self.figure = plt.Figure()
+                        a = self.figure.add_subplot(111)
+                        a.scatter(self.data[self.input_var1[0]],self.data[self.input_var2[0]])
+                        # todo tutaj trzeba poprawidz żeby działały tytuły i podpis
+
+                        plt.xlabel(self.input_var1[0])
+                        plt.ylabel(self.input_var2[0])
+                        plt.title("Correlogram")
+
+
+                        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+                        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+                        self.widget = canvas.get_tk_widget()
+                        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+                        self.text_4.configure(state='normal')
+                        self.text_4.delete("1.0", "end")
+                        self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
+                        self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
+                        self.text_4.insert(tk.END, round(self.correlation,6))
+                        self.text_4.configure(state='disabled')
+
+                    else:
+                        popup_window("Information", "Incorrect variable name on second entry!")
+                else:
+                    popup_window("Information", "Incorrect variable name on first entry!")
+            else:
+                popup_window("Information", "No variables entered on second entry!")
+        else:
+            popup_window("Information", "No variables entered on first entry!")
 
 
 

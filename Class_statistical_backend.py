@@ -14,7 +14,7 @@ class StatisticBackend:
         self.differentiation_m_l = []
         self.skew_kurt_l = []
 
-        self.average_m_id = ['Sum', 'Mean', "Max", "Min", "Median", "Quantile_25", "Quantile_75", "Dominant"]
+        self.average_m_id = ['Sum', 'Mean', "Max", "Min", "Median", "Q_25%", "Q_75%", "Dominant"]
         self.differentiation_m_id = ["Standard deviation", "Coefficient of variation", "Range",
                                      "Interquartile range", "Quarterly deviation", ]
         self.skew_kurt_id = ["Skewness", "Kurtosis", 'Mean', "Median","Dominant"]

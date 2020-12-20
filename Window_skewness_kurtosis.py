@@ -86,8 +86,6 @@ class SkewnessKurtosis:
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
-
-
         self.widget = None
         self.toolbar = None
         self.text_stat = None

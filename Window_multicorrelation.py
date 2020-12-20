@@ -81,6 +81,7 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
                     self.a = self.figure.add_subplot(111)
                     sns.heatmap(self.data[self.input_var].corr(method='pearson'), ax=self.a, linecolor="lightgray",annot=True, center=0)
                     plt.title("Correlogram")
+
                     #todo poprawic korelogram
                     #https://stackoverflow.com/questions/43507756/python-seaborn-how-to-replicate-corrplot
 

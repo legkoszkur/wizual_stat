@@ -42,10 +42,10 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                                     onvalue="Min",offvalue='', tristatevalue=0, )
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch5,
                                     onvalue="Median",offvalue='', tristatevalue=0, )
-        self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25", variable=self.ch6,
-                                    onvalue="Quantile_25",offvalue='', tristatevalue=0, )
-        self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75", variable=self.ch7,
-                                    onvalue="Quantile_75",offvalue='', tristatevalue=0, )
+        self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25%", variable=self.ch6,
+                                    onvalue="Q_25%",offvalue='', tristatevalue=0, )
+        self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75%", variable=self.ch7,
+                                    onvalue="Q_75%",offvalue='', tristatevalue=0, )
         self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8,
                                     onvalue="Dominant",offvalue='', tristatevalue=0, )
 
@@ -128,11 +128,9 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                         self.df = self.statistical_backend.average_measures_df
                         self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                         self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
-                        self.bar_g = self.df.plot(kind="bar",
-                                                  ax=self.a)  # tu przypisuję do mojej figury plot który jest barem i wpisuję go w ax=a czyli jakby dopiero tutaj określam gdzie
+                        self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
 
-                        # znajdzie się mój wykres w tym przypadku w "a"
-                        # potem renderuje go za pomoca
+
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
