@@ -1,8 +1,9 @@
 import tkinter as tk
-from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
-import matplotlib.pyplot as plt
+from Function_data_check import data_preparation
+
 
 class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
     def __init__(self, master,data):
@@ -45,14 +46,9 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.text_2.get("1.0", "end")
-        self.input_var = self.input_var.split(" ")
-        self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
-        self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
-        if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
-            self.input_var = self.input_var[:-1]
-        self.check_list = all(item in self.variables for item in self.input_var)
+        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
+        self.check_list = all(item in self.variables for item in self.input_var)
 
         if self.input_var:
             if self.check_list is True:
@@ -63,15 +59,14 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
                 if self.toolbar:
                     self.toolbar.destroy()
 
-                f = Figure(figsize=(5, 5), dpi=100)
-                self.a = f.add_subplot(111)
-                order_numbers = []
+                self.figure = plt.figure()
+                self.a = self.figure.add_subplot(111)
+                self.df = self.data[self.input_var]
+                self.df.plot(ax=self.a, )
+                plt.xlabel("Periods", labelpad=1.3)
+                plt.title("Amounts")
 
-                for i in range(len(self.data[self.input_var])):
-                    order_numbers.append(i)
-                self.a.plot(order_numbers, self.data[self.input_var])
-
-                canvas = FigureCanvasTkAgg(f, master=self.graph_f)
+                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                 self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                 self.widget = canvas.get_tk_widget()
                 self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)

@@ -1,5 +1,6 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
+from Function_data_check import data_preparation
 from tkinter import colorchooser
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
@@ -118,12 +119,9 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.text_2.get("1.0", "end")
-        self.input_var = self.input_var.split(" ")
-        self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
-        self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
-        if self.input_var[-1] == '': #usuwa ostatnie puste miejsce jakby się pojawiło
-            self.input_var = self.input_var[:-1]
+        # cleaning input by self made function
+        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
+
         self.check_list = all(item in self.variables for item in self.input_var)
 
         self.input_s_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(), self.ch6.get(),

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
+from Function_data_check import data_preparation
 
 
 class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykresów
@@ -81,14 +82,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.master.destroy()
 
     def chosen_data_insert(self):
-
-        self.input_var = self.text_2.get("1.0", "end")
-        self.input_var = self.input_var.split(" ")
-
-        self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
-        self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
-        if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
-            self.input_var = self.input_var[:-1]
+        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
         self.check_list = all(item in self.variables for item in self.input_var)
 

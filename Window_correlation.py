@@ -1,5 +1,6 @@
 import tkinter as tk
 from matplotlib.figure import Figure
+from Function_data_check import data_preparation
 import scipy.stats
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
@@ -61,16 +62,9 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
         if self.toolbar:
             self.toolbar.destroy()
 
+        self.input_var1 = data_preparation(self.text_2.get("1.0", "end"))
+        self.input_var2 = data_preparation(self.text_3.get("1.0", "end"))
 
-        self.input_var1 = self.text_2.get("1.0", "end")
-        self.input_var1 = self.input_var1.split(" ")
-        self.input_var1 = [x for x in self.input_var1 if x]  # to usuwa puste
-        self.input_var1[-1] = self.input_var1[-1].strip()  # to usuwa \n
-
-        self.input_var2 = self.text_3.get("1.0", "end")
-        self.input_var2 = self.input_var2.split(" ")
-        self.input_var2 = [x for x in self.input_var2 if x]  # to usuwa puste
-        self.input_var2[-1] = self.input_var2[-1].strip()
 
         f = Figure(figsize=(5, 5), dpi=100)
         a = f.add_subplot(111)

@@ -2,10 +2,10 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-import math
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
+from Function_data_check import data_preparation
 
 
 class SkewnessKurtosis:
@@ -96,13 +96,10 @@ class SkewnessKurtosis:
         self.master.destroy()
 
     def chosen_data_insert(self):
-        self.input_var = self.text_2.get("1.0", "end")
-        self.input_var = self.input_var.split(" ")
-        self.input_var = [x for x in self.input_var if x]  # to usuwa puste (w srodku ale nie na koncu)
-        self.input_var[-1] = self.input_var[-1].strip()  # to usuwa \n
-        if self.input_var[-1] == '':  # usuwa ostatnie puste miejsce jakby się pojawiło
-            self.input_var = self.input_var[:-1]
+        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
+
         self.check_list = all(item in self.variables for item in self.input_var)
+
         self.check_b_l = [self.ch1.get(),self.ch2.get(),self.ch3.get(),self.ch4.get(),self.ch5.get()]
         # to usuwa puste pola żeby można było załadować odpowiednie nazywy
         self.check_b_l = [x for x in self.check_b_l if x]
