@@ -3,7 +3,6 @@ from Window_simple_graphics import Graphics
 from Window_Average_measures import Average_measures
 from Window_Differentation_measures import DifferentationMeasures
 from Window_skewness_kurtosis import SkewnessKurtosis
-from Window_settings import Settings
 from Window_popup_message import popup_window
 from Window_correlation import Correlation
 from Window_multicorrelation import MultiCorrelation
@@ -32,7 +31,7 @@ class StartPage:
         stat = tk.Menu(self.menubar, tearoff=False)
         tut = tk.Menu(self.menubar, tearoff=False)
 
-        opti.add_command(label="Settings", command=lambda: self.new_window(Settings),)
+        opti.add_command(label="Settings", command=lambda: popup_window("Information", "There may be some settings here in the future.", ),)
         opti.add_command(label="Load", command=lambda: self.data_manager.file_dialog(), )
         opti.add_command(label="Remove", command=lambda: self.data_manager.remove_data(), )
         opti.add_command(label="Exit", command=lambda: quit())
@@ -60,8 +59,6 @@ class StartPage:
             self.new.destroy()
             popup_window("Information", "No data have been loaded.")
             pass
-
-
 
 root = tk.Tk()
 app = StartPage(root)
