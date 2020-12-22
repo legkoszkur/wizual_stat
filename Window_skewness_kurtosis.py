@@ -163,34 +163,34 @@ class SkewnessKurtosis:
                         popup_window("Information", "Only one variable can be displayed.")
                         pass
 
-            elif self.ratio_var.get() == 1:
-                    if self.check_b_l:
+                elif self.ratio_var.get() == 1:
 
-                        self.ch_b6.config(state="disable", )
-                        self.ch_b1.config(state="normal", )
-                        self.ch_b2.config(state="normal", )
+                        if self.check_b_l:
 
-                        self.ch_b6.config(offvalue='', )
-                        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
+                            self.ch_b6.config(state="disable", )
+                            self.ch_b1.config(state="normal", )
+                            self.ch_b2.config(state="normal", )
 
-                        if self.widget:
-                            self.widget.destroy()
+                            self.ch_b6.config(offvalue='', )
+                            self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
 
-                        if self.toolbar:
-                            self.toolbar.destroy()
+                            if self.widget:
+                                self.widget.destroy()
 
-                        if self.text_stat:
-                            self.text_stat.destroy()
+                            if self.toolbar:
+                                self.toolbar.destroy()
 
-                        self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-                        self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-                        self.text_stat.configure(state='normal')
-                        self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
-                        self.text_stat.configure(state='disabled')
-                        self.widget = None
-                        self.toolbar = None
-                    else:
-                        popup_window("Information", "No statistic chosen.")
+                            if self.text_stat:
+                                self.text_stat.destroy()
+
+                            self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
+                            self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+                            self.text_stat.configure(state='normal')
+                            self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
+                            self.text_stat.configure(state='disabled')
+                            self.widget = None
+                            self.toolbar = None
+                        #todo tutaj naprawić zabezpieczenia (brak danych, złe dane,)
             else:
                 popup_window("Information", "Incorrect variable name!")
         else:

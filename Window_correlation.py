@@ -77,13 +77,12 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
 
                         self.figure = plt.Figure()
                         a = self.figure.add_subplot(111)
-                        a.scatter(self.data[self.input_var1[0]],self.data[self.input_var2[0]])
-                        # todo tutaj trzeba poprawidz żeby działały tytuły i podpis
-
-                        plt.xlabel(self.input_var1[0])
-                        plt.ylabel(self.input_var2[0])
-                        plt.title("Correlogram")
-
+                        print(self.input_var1[0])
+                        #,x=self.input_var1[0],y=self.input_var2[0]
+                        a.scatter(self.data[self.input_var1[0]],self.data[self.input_var2[0]],)
+                        a.set_xlabel(self.input_var1[0])
+                        a.set_ylabel(self.input_var2[0])
+                        a.set_title("Correlogram")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
