@@ -30,14 +30,14 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.ch5 = tk.StringVar()
 
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Standard deviation", variable=self.ch1,
-                                    onvalue="Standard deviation", tristatevalue=0, )
+                                    onvalue="Sd", tristatevalue=0, )
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Coefficient of variation", variable=self.ch2,
-                                    onvalue="Coefficient of variation", tristatevalue=0, )
+                                    onvalue="CV", tristatevalue=0, )
         self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Range", variable=self.ch3, onvalue="Range", tristatevalue=0, )
         self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Interquartile range", variable=self.ch4,
-                                    onvalue="Interquartile range", tristatevalue=0, )
-        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Quarter deviation", variable=self.ch5,
-                                    onvalue="Quarterly deviation", tristatevalue=0, )
+                                    onvalue="IQR", tristatevalue=0, )
+        self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Quartile deviation", variable=self.ch5,
+                                    onvalue="QD", tristatevalue=0, )
 
         self.ch_b1.grid(row=0,column=0, sticky="W")
         self.ch_b2.grid(row=0,column=1, sticky="W")

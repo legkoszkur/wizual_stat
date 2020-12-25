@@ -80,8 +80,8 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
                         print(self.input_var1[0])
                         #,x=self.input_var1[0],y=self.input_var2[0]
                         a.scatter(self.data[self.input_var1[0]],self.data[self.input_var2[0]],)
-                        a.set_xlabel(self.input_var1[0])
-                        a.set_ylabel(self.input_var2[0])
+                        a.set_xlabel(self.input_var1[0], labelpad=0.5, )
+                        a.set_ylabel(self.input_var2[0], labelpad=0.5,)
                         a.set_title("Correlogram")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)

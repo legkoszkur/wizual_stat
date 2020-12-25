@@ -8,7 +8,7 @@ from Class_statistical_backend import StatisticBackend
 
 
 class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
-    def __init__(self, master,data):
+    def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("1000x600")
