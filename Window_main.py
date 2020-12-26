@@ -28,25 +28,29 @@ class StartPage:
 
         opti = tk.Menu(self.menubar, tearoff=False)
         graph = tk.Menu(self.menubar, tearoff=False)
+        corr = tk.Menu(self.menubar, tearoff=False)
         stat = tk.Menu(self.menubar, tearoff=False)
-        tut = tk.Menu(self.menubar, tearoff=False)
+        other = tk.Menu(self.menubar, tearoff=False)
+        instruction = tk.Menu(self.menubar, tearoff=False)
 
         opti.add_command(label="Load", command=lambda: self.data_manager.file_dialog(), )
         opti.add_command(label="Remove", command=lambda: self.data_manager.remove_data(), )
         opti.add_command(label="Exit", command=lambda: quit())
 
         graph.add_command(label="Graphics", command=lambda: self.new_window(Graphics))
-        graph.add_command(label="Correlation", command=lambda: self.new_window(Correlation))
-        graph.add_command(label="Multi correlation", command=lambda: self.new_window(MultiCorrelation))
+        corr.add_command(label="Correlation", command=lambda: self.new_window(Correlation))
+        corr.add_command(label="Multi correlation", command=lambda: self.new_window(MultiCorrelation))
         stat.add_command(label="Average measures", command=lambda: self.new_window(Average_measures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentationMeasures))
-        stat.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
-        tut.add_command(label="Tutorials", command=lambda: popup_window("Information", "There may be some tutorials here in the future.", ))
+        other.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
+        instruction.add_command(label="Tutorial", command=lambda: popup_window("Information", "There may be some tutorials here in the future.", ))
 
         self.menubar.add_cascade(label="Options",menu=opti)
         self.menubar.add_cascade(label="Graphics", menu=graph,)
+        self.menubar.add_cascade(label="Correlation", menu=corr, )
         self.menubar.add_cascade(label="Statistics", menu=stat,)
-        self.menubar.add_cascade(label="Tutorials", menu=tut)
+        self.menubar.add_cascade(label="Other", menu=other, )
+        self.menubar.add_cascade(label="Instruction", menu=instruction)
 
         self.master.config(menu=self.menubar)
 
