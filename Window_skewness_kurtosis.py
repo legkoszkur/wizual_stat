@@ -108,9 +108,12 @@ class SkewnessKurtosis:
 
                 if self.ratio_var.get() == 0:
                     if len(self.input_var) == 1:
-                        self.ch_b6.config(state="normal")
                         self.ch_b1.config(offvalue='', )
                         self.ch_b2.config(offvalue='', )
+                        self.ch_b1.config(state="disabled")
+                        self.ch_b2.config(state="disabled")
+                        self.ch_b6.config(state="normal")
+
 
                         if self.widget:
                             self.widget.destroy()
@@ -166,7 +169,7 @@ class SkewnessKurtosis:
                 elif self.ratio_var.get() == 1:
 
                         if self.check_b_l:
-
+                            self.ch_b6.config(offvalue='', )
                             self.ch_b6.config(state="disable", )
                             self.ch_b1.config(state="normal", )
                             self.ch_b2.config(state="normal", )

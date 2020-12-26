@@ -129,8 +129,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                         self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
                         self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
-
-
+                        self.a.set_title("Average measures")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)

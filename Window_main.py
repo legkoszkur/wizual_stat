@@ -31,7 +31,6 @@ class StartPage:
         stat = tk.Menu(self.menubar, tearoff=False)
         tut = tk.Menu(self.menubar, tearoff=False)
 
-        opti.add_command(label="Settings", command=lambda: popup_window("Information", "There may be some settings here in the future.", ),)
         opti.add_command(label="Load", command=lambda: self.data_manager.file_dialog(), )
         opti.add_command(label="Remove", command=lambda: self.data_manager.remove_data(), )
         opti.add_command(label="Exit", command=lambda: quit())

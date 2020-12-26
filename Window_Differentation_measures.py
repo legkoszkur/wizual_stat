@@ -115,6 +115,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
                         self.figure = plt.figure()
                         self.a = self.figure.add_subplot(111)
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
+                        self.a.set_title("Differentation Measures")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
