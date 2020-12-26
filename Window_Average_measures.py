@@ -1,7 +1,6 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
 from Function_data_check import data_preparation
-from tkinter import colorchooser
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend

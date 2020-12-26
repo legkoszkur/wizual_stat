@@ -7,6 +7,7 @@ from Window_popup_message import popup_window
 from Window_correlation import Correlation
 from Window_multicorrelation import MultiCorrelation
 from Class_data_manager import Data_manager
+from Window_Instruction import InstructionWindow
 
 FONT_label_title = []
 
@@ -43,7 +44,7 @@ class StartPage:
         stat.add_command(label="Average measures", command=lambda: self.new_window(Average_measures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentationMeasures))
         other.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
-        instruction.add_command(label="Tutorial", command=lambda: popup_window("Information", "There may be some tutorials here in the future.", ))
+        instruction.add_command(label="Tutorial", command=lambda: InstructionWindow(tk.Toplevel(self.master)))
 
         self.menubar.add_cascade(label="Options",menu=opti)
         self.menubar.add_cascade(label="Graphics", menu=graph,)

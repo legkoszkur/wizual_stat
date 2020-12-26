@@ -6,12 +6,9 @@ import subprocess
 import os
 from Window_popup_message import popup_window
 
-
-# todo wywalić całego labelframa z ładowaniem danych do osobnej klasy dajesz 2 mastery i na dole czerwony pasek (data loaded)/(data unavalible)
-
 class Data_manager:
 
-    def __init__(self,master,frame_with_data):
+    def __init__(self, master, frame_with_data):
 
         self.treeview_style = ttk.Treeview(frame_with_data)
         self.treeview_style.place(relheight=1, relwidth=1)
@@ -27,7 +24,8 @@ class Data_manager:
     def file_dialog(self):
         try:
              self.file_path = askopenfile(mode='r', title="Select A File",
-                                          filetypes=[("Excel Files", "*.xlsx"), ("Excel Files", "*.xls"), ("CSV Files","*.csv"),])
+                                          filetypes=[("Excel Files", "*.xlsx"), ("Excel Files", "*.xls"),
+                                                     ("CSV Files","*.csv"),])
              self.path_label["text"] = self.file_path.name
              self.path_label["bg"] = "light green"
              self.load_data(path=self.file_path.name)

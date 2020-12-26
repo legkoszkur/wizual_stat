@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c9604b01-e3ac-4915-8c91-145e86eb07ee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Window_Instruction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Window_Average_measures.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_Average_measures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Window_Instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_Instruction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Window_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Window_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/brudnopisy/brudnopis1.py" beforeDir="false" afterPath="$PROJECT_DIR$/brudnopisy/brudnopis1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class_data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/class_data_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +33,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/brudnopisy" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Git_projects\wizual_stat\brudnopisy" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.Window_main">
     <configuration name="Function_data_check" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -57,7 +66,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Window_data_format" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Window_Instruction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="wizual_stat" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -69,7 +78,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Window_data_format.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Window_Instruction.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,10 +153,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Window_main" />
+        <item itemvalue="Python.brudnopis1" />
+        <item itemvalue="Python.Window_Instruction" />
         <item itemvalue="Python.Function_data_check" />
         <item itemvalue="Python.brudnopis2" />
-        <item itemvalue="Python.Window_data_format" />
-        <item itemvalue="Python.brudnopis1" />
       </list>
     </recent_temporary>
   </component>
