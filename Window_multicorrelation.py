@@ -17,6 +17,9 @@ class MultiCorrelation:
         self.a = None
         self.input_var = None
         self.check_list = None
+        self.widget = None
+        self.toolbar = None
+        self.text_stat = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.98)
@@ -53,10 +56,6 @@ class MultiCorrelation:
         self.radio_b2 = tk.Radiobutton(self.options_lf, text="Graph", value=0, variable=self.ratio_var)
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
-
-        self.widget = None
-        self.toolbar = None
-        self.text_stat = None
 
     def close_window(self):
         self.master.destroy()

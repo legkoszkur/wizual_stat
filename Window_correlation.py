@@ -88,8 +88,8 @@ class CorrelationWindow:
                         self.a = self.figure.add_subplot(111)
 
                         self.a.scatter(self.data[self.input_var1[0]], self.data[self.input_var2[0]],)
-                        self.a.set_xlabel(self.input_var1[0], labelpad=0, )
-                        self.a.set_ylabel(self.input_var2[0], labelpad=0,)
+                        self.a.set_xlabel(self.input_var1[0], labelpad=0)
+                        self.a.set_ylabel(self.input_var2[0], labelpad=0)
                         self.a.set_title("Correlogram")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)

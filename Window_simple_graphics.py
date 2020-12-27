@@ -46,8 +46,6 @@ class Graphics:
         self.text_2 = tk.Text(self.text_l2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
-
-
     def close_window(self):
         self.master.destroy()
 

@@ -20,6 +20,9 @@ class DifferentiationMeasures:
         self.a = None
         self.bar_g = None
         self.check_b_l = None
+        self.widget = None
+        self.toolbar = None
+        self.text_stat = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
@@ -27,7 +30,7 @@ class DifferentiationMeasures:
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Differentiation Measures", )
+        self.stat_lf = tk.LabelFrame(self.master, text="Differentiation Measures")
         self.stat_lf.place(relx=0.195, rely=0.91, relwidth=0.61, relheight=0.08)
 
         self.ch1 = tk.StringVar()
@@ -40,7 +43,8 @@ class DifferentiationMeasures:
                                     onvalue="Sd", tristatevalue=0, )
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Coefficient of variation", variable=self.ch2,
                                     onvalue="CV", tristatevalue=0, )
-        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Range", variable=self.ch3, onvalue="Range", tristatevalue=0, )
+        self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Range", variable=self.ch3, onvalue="Range",
+                                    tristatevalue=0, )
         self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Interquartile range", variable=self.ch4,
                                     onvalue="IQR", tristatevalue=0, )
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Quartile deviation", variable=self.ch5,
@@ -82,10 +86,6 @@ class DifferentiationMeasures:
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
-        self.widget = None
-        self.toolbar = None
-        self.text_stat = None
-
     def close_window(self):
         self.master.destroy()
 
@@ -99,7 +99,9 @@ class DifferentiationMeasures:
             self.ch4.get(), self.ch5.get(),
             ]
 
-        self.check_b_l = [x for x in self.check_b_l if x]
+        self.check_b_l = [
+            x for x in self.check_b_l if x
+        ]
 
         if self.check_b_l:
 

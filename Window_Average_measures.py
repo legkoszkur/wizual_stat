@@ -112,7 +112,9 @@ class AverageMeasures:
             self.ch5.get(), self.ch6.get(), self.ch7.get(), self.ch8.get(),
             ]
 
-        self.input_s_l = [x for x in self.input_s_l if x]
+        self.input_s_l = [
+            x for x in self.input_s_l if x
+        ]
 
         if self.input_s_l:
 
