@@ -6,13 +6,17 @@ import seaborn as sns
 from Function_data_check import data_preparation
 
 
-
-class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
+class MultiCorrelation:
     def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("1000x600")
         self.master.resizable(False, False)
+        self.corr_matrix = None
+        self.figure = None
+        self.a = None
+        self.input_var = None
+        self.check_list = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.98)
@@ -31,13 +35,13 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
         self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.44)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
-        # warp word powoduje że przenosi całe słowo do następnej linijki
+
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master,text="Chosen variables", relief="flat")
+        self.text_lf2 = tk.LabelFrame(self.master, text="Chosen variables", relief="flat")
         self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.37)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -60,7 +64,6 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
     def chosen_data_insert(self):
         self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
-
         self.check_list = all(item in self.variables for item in self.input_var)
 
         if self.input_var:
@@ -79,17 +82,14 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
 
                     self.figure = plt.figure()
                     self.a = self.figure.add_subplot(111)
-                    sns.heatmap(self.data[self.input_var].corr(method='pearson'), ax=self.a, linecolor="lightgray",annot=True, center=0)
+                    sns.heatmap(self.data[self.input_var].corr(method='pearson'),
+                                ax=self.a, linecolor="light gray", annot=True, center=0)
                     plt.title("Correlogram")
-
-                    #todo poprawic korelogram
-                    #https://stackoverflow.com/questions/43507756/python-seaborn-how-to-replicate-corrplot
 
                     canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                     self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                     self.widget = canvas.get_tk_widget()
                     self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
 
                 elif self.ratio_var.get() == 1:
 
@@ -106,7 +106,7 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
                     self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                     self.text_stat.configure(state='normal')
                     self.corr_matrix = self.data[self.input_var].corr(method='pearson')
-                    self.text_stat.insert(tk.END,self.corr_matrix)
+                    self.text_stat.insert(tk.END, self.corr_matrix)
                     self.text_stat.configure(state='disabled')
                     self.widget = None
                     self.toolbar = None
@@ -115,46 +115,3 @@ class MultiCorrelation:  # todo tutuaj będzie okienko do tworzenia wykresów
                 popup_window("Information", "Incorrect variable name!")
         else:
             popup_window("Information", "No variables entered.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

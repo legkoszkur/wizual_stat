@@ -1,7 +1,6 @@
 from tkinter import Label, LabelFrame, Text, END
 
 
-
 class InstructionWindow:
 
     def __init__(self, master, ):
@@ -13,7 +12,7 @@ class InstructionWindow:
         self.text = "To enter more than one variable names you must \n use one space as described on below example:"
         self. example_variables = "x1 x2 x3"
 
-        self.label = Label(self.master,text=self.text,justify='left', bg="white", )
+        self.label = Label(self.master, text=self.text, justify='left', bg="white", )
         self.label.place(relx=0.05, rely=0.05, relwidth=0.9, relheight=0.2)
 
         self.text_lf1 = LabelFrame(self.master, text="Existing variables", relief="flat")
@@ -24,8 +23,3 @@ class InstructionWindow:
         self.text_1.configure(state='normal')
         self.text_1.insert(END, self.example_variables)
         self.text_1.configure(state='disabled')
-
-
-
-
-

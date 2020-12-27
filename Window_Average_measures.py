@@ -6,12 +6,24 @@ from Window_popup_message import popup_window
 from Class_statistical_backend import StatisticBackend
 
 
-class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
+class AverageMeasures:
+
     def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("1000x600")
         self.master.resizable(False, False)
+        self.input_var = None
+        self.check_list = None
+        self.df = None
+        self.figure = None
+        self.a = None
+        self.bar_g = None
+        self.input_s_l = None
+        self.statistical_backend = None
+        self.widget = None
+        self.toolbar = None
+        self.text_stat = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
@@ -32,21 +44,21 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.ch8 = tk.StringVar()
 
         self.ch_b1 = tk.Checkbutton(self.stat_lf, text="Sum", variable=self.ch1,
-                                    onvalue="Sum",offvalue='', tristatevalue=0, )
+                                    onvalue="Sum", offvalue='', tristatevalue=0, )
         self.ch_b2 = tk.Checkbutton(self.stat_lf, text="Mean", variable=self.ch2,
-                                    onvalue="Mean",offvalue='', tristatevalue=0, )
+                                    onvalue="Mean", offvalue='', tristatevalue=0, )
         self.ch_b3 = tk.Checkbutton(self.stat_lf, text="Max", variable=self.ch3,
-                                    onvalue="Max",offvalue='', tristatevalue=0, )
+                                    onvalue="Max", offvalue='', tristatevalue=0, )
         self.ch_b4 = tk.Checkbutton(self.stat_lf, text="Min", variable=self.ch4,
-                                    onvalue="Min",offvalue='', tristatevalue=0, )
+                                    onvalue="Min", offvalue='', tristatevalue=0, )
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Median", variable=self.ch5,
-                                    onvalue="Median",offvalue='', tristatevalue=0, )
+                                    onvalue="Median", offvalue='', tristatevalue=0, )
         self.ch_b6 = tk.Checkbutton(self.stat_lf, text="Quantile_25%", variable=self.ch6,
-                                    onvalue="Q_25%",offvalue='', tristatevalue=0, )
+                                    onvalue="Q_25%", offvalue='', tristatevalue=0, )
         self.ch_b7 = tk.Checkbutton(self.stat_lf, text="Quantile_75%", variable=self.ch7,
-                                    onvalue="Q_75%",offvalue='', tristatevalue=0, )
+                                    onvalue="Q_75%", offvalue='', tristatevalue=0, )
         self.ch_b8 = tk.Checkbutton(self.stat_lf, text="Dominant", variable=self.ch8,
-                                    onvalue="Dominant",offvalue='', tristatevalue=0, )
+                                    onvalue="Dominant", offvalue='', tristatevalue=0, )
 
         self.ch_b1.grid(row=0, column=0, sticky="W")
         self.ch_b2.grid(row=0, column=1, sticky="W")
@@ -68,7 +80,7 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.45)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
-        # warp word powoduje że przenosi całe słowo do następnej linijki
+
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
@@ -87,24 +99,20 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
-        self.widget = None
-        self.toolbar = None
-        self.text_stat = None
-
     def close_window(self):
         self.master.destroy()
 
     def chosen_data_insert(self):
-        # cleaning input by self made function
-        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
+        self.input_var = data_preparation(self.text_2.get("1.0", "end"))
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.input_s_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(), self.ch6.get(),
-                          self.ch7.get(), self.ch8.get(), ]
-        # to usuwa puste pola żeby można było załadować odpowiednie nazywy
-        self.input_s_l = [x for x in self.input_s_l if x]
+        self.input_s_l = [
+            self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),
+            self.ch5.get(), self.ch6.get(), self.ch7.get(), self.ch8.get(),
+            ]
 
+        self.input_s_l = [x for x in self.input_s_l if x]
 
         if self.input_s_l:
 
@@ -125,8 +133,8 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                             self.text_stat.destroy()
 
                         self.df = self.statistical_backend.average_measures_df
-                        self.figure = plt.figure()  # figura to jest to miejsce przestrzen na którą można wrzućac wiele wykresów
-                        self.a = self.figure.add_subplot(111)  # to jest jeden z wykresów
+                        self.figure = plt.figure()
+                        self.a = self.figure.add_subplot(111)
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
                         self.a.set_title("Average measures")
 
@@ -134,7 +142,6 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
                         self.widget = canvas.get_tk_widget()
                         self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
 
                     elif self.ratio_var.get() == 1:
 
@@ -160,42 +167,3 @@ class Average_measures:#todo tutuaj będzie okienko do tworzenia wykresów
                 popup_window("Information", "No variables entered.")
         else:
             popup_window("Information", "No statistic chosen.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -5,5 +5,3 @@ def data_preparation(input_var):
     if result[-1] == '':
         result = result[:-1]
     return result
-
-

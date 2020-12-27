@@ -4,12 +4,21 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from Window_popup_message import popup_window
 
-class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
-    def __init__(self, master,data):
+
+class CorrelationWindow:
+    def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("800x600")
         self.master.resizable(False, False)
+        self.input_var1 = None
+        self.input_var2 = None
+        self.check_list1 = None
+        self.check_list2 = None
+        self.figure = None
+        self.corr_df = None
+        self.correlation = None
+        self.a = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.75, relheight=0.98)
@@ -45,7 +54,7 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.text_l4 = tk.LabelFrame(self.master,  text="Pearson correlation ", relief="flat")
         self.text_l4.place(relx=0.76, rely=0.69, relwidth=0.23, relheight=0.1)
-        self.text_4 = tk.Text(self.text_l4, bd=4,bg="silver", relief="groove",state='disabled')
+        self.text_4 = tk.Text(self.text_l4, bd=4, bg="silver", relief="groove", state='disabled')
         self.text_4.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
         self.widget = None
@@ -76,13 +85,12 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
                             self.toolbar.destroy()
 
                         self.figure = plt.Figure()
-                        a = self.figure.add_subplot(111)
-                        print(self.input_var1[0])
-                        #,x=self.input_var1[0],y=self.input_var2[0]
-                        a.scatter(self.data[self.input_var1[0]],self.data[self.input_var2[0]],)
-                        a.set_xlabel(self.input_var1[0], labelpad=0, )
-                        a.set_ylabel(self.input_var2[0], labelpad=0,)
-                        a.set_title("Correlogram")
+                        self.a = self.figure.add_subplot(111)
+
+                        self.a.scatter(self.data[self.input_var1[0]], self.data[self.input_var2[0]],)
+                        self.a.set_xlabel(self.input_var1[0], labelpad=0, )
+                        self.a.set_ylabel(self.input_var2[0], labelpad=0,)
+                        self.a.set_title("Correlogram")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
@@ -93,7 +101,7 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
                         self.text_4.delete("1.0", "end")
                         self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
                         self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
-                        self.text_4.insert(tk.END, round(self.correlation,6))
+                        self.text_4.insert(tk.END, round(self.correlation, 6))
                         self.text_4.configure(state='disabled')
 
                     else:
@@ -104,30 +112,3 @@ class Correlation:#todo tutuaj będzie okienko do tworzenia wykresów
                 popup_window("Information", "No variables entered on second entry!")
         else:
             popup_window("Information", "No variables entered on first entry!")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

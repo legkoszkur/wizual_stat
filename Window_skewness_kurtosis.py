@@ -14,6 +14,20 @@ class SkewnessKurtosis:
         self.data = data
         self.master.geometry("1000x600")
         self.master.resizable(False, False)
+        self.check_b_l = None
+        self.input_var = None
+        self.check_list = None
+        self.widget = None
+        self.toolbar = None
+        self.text_stat = None
+        self.df = None
+        self.mean = None
+        self.median = None
+        self.dominant = None
+        self.figure = None
+        self.a = None
+        self.statistical_backend = None
+        self.kde_value = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
@@ -86,10 +100,6 @@ class SkewnessKurtosis:
         self.radio_b1.grid(row=0, column=0, sticky="W")
         self.radio_b2.grid(row=0, column=1, sticky="W")
 
-        self.widget = None
-        self.toolbar = None
-        self.text_stat = None
-
     def close_window(self):
         self.master.destroy()
 
@@ -98,22 +108,27 @@ class SkewnessKurtosis:
 
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.check_b_l = [self.ch1.get(),self.ch2.get(),self.ch3.get(),self.ch4.get(),self.ch5.get()]
-        # to usuwa puste pola żeby można było załadować odpowiednie nazywy
-        self.check_b_l = [x for x in self.check_b_l if x]
+        self.check_b_l = [
+            self.ch1.get(), self.ch2.get(), self.ch3.get(),
+            self.ch4.get(), self.ch5.get()
+        ]
+
+        self.check_b_l = [
+            x for x in self.check_b_l if x
+        ]
 
         if self.input_var:
 
             if self.check_list:
 
                 if self.ratio_var.get() == 0:
+
                     if len(self.input_var) == 1:
                         self.ch_b1.config(offvalue='', )
                         self.ch_b2.config(offvalue='', )
                         self.ch_b1.config(state="disabled")
                         self.ch_b2.config(state="disabled")
                         self.ch_b6.config(state="normal")
-
 
                         if self.widget:
                             self.widget.destroy()
@@ -145,17 +160,17 @@ class SkewnessKurtosis:
 
                         if self.ch3.get() == "Mean":
                             self.a.axvline(self.mean, color='y', linestyle='solid', linewidth=1)
-                            min_ylim, max_ylim = plt.ylim()
-                            plt.text(self.mean * 1.1, max_ylim * 0.9, 'Mean: {:.2f}'.format(self.mean), color='y', )
+                            min_y_lim, max_y_lim = plt.ylim()
+                            plt.text(self.mean * 1.1, max_y_lim * 0.9, 'Mean: {:.2f}'.format(self.mean), color='y', )
                         if self.ch4.get() == "Median":
                             self.a.axvline(self.median, color='r', linestyle='dashed', linewidth=1)
-                            min_ylim, max_ylim = plt.ylim()
-                            plt.text(self.median * 1.1, max_ylim * 0.85, 'Median: {:.2f}'.format(self.median),
+                            min_y_lim, max_y_lim = plt.ylim()
+                            plt.text(self.median * 1.1, max_y_lim * 0.85, 'Median: {:.2f}'.format(self.median),
                                      color='r', )
                         if self.ch5.get() == "Dominant":
                             self.a.axvline(self.dominant, color='b', linestyle='dotted', linewidth=1)
-                            min_ylim, max_ylim = plt.ylim()
-                            plt.text(self.dominant * 1.1, max_ylim * 0.8, 'Dominant: {:.2f}'.format(self.dominant),
+                            min_y_lim, max_y_lim = plt.ylim()
+                            plt.text(self.dominant * 1.1, max_y_lim * 0.8, 'Dominant: {:.2f}'.format(self.dominant),
                                      color='b', )
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
@@ -193,51 +208,9 @@ class SkewnessKurtosis:
                             self.text_stat.configure(state='disabled')
                             self.widget = None
                             self.toolbar = None
-                        #todo tutaj naprawić zabezpieczenia (brak danych, złe dane,)
+                        #todo napraw tutaj zabezpieczenia
+
             else:
                 popup_window("Information", "Incorrect variable name!")
         else:
             popup_window("Information", "No variables entered.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

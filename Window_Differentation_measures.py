@@ -6,12 +6,20 @@ from Class_statistical_backend import StatisticBackend
 from Function_data_check import data_preparation
 
 
-class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykresów
+class DifferentiationMeasures:
     def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("1000x600")
         self.master.resizable(False, False)
+        self.input_var = None
+        self.check_list = None
+        self.statistical_backend = None
+        self.df = None
+        self.figure = None
+        self.a = None
+        self.bar_g = None
+        self.check_b_l = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.8, relheight=0.89)
@@ -19,9 +27,8 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.menu_f = tk.LabelFrame(self.master, text="Menu")
         self.menu_f.place(relx=0.81, rely=0.91, relwidth=0.185, relheight=0.08)
 
-        self.stat_lf = tk.LabelFrame(self.master, text="Differentation Measures", )
+        self.stat_lf = tk.LabelFrame(self.master, text="Differentiation Measures", )
         self.stat_lf.place(relx=0.195, rely=0.91, relwidth=0.61, relheight=0.08)
-
 
         self.ch1 = tk.StringVar()
         self.ch2 = tk.StringVar()
@@ -39,11 +46,11 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.ch_b5 = tk.Checkbutton(self.stat_lf, text="Quartile deviation", variable=self.ch5,
                                     onvalue="QD", tristatevalue=0, )
 
-        self.ch_b1.grid(row=0,column=0, sticky="W")
-        self.ch_b2.grid(row=0,column=1, sticky="W")
-        self.ch_b3.grid(row=0,column=2, sticky="W")
-        self.ch_b4.grid(row=0,column=3, sticky="W")
-        self.ch_b5.grid(row=0,column=4, sticky="W")
+        self.ch_b1.grid(row=0, column=0, sticky="W")
+        self.ch_b2.grid(row=0, column=1, sticky="W")
+        self.ch_b3.grid(row=0, column=2, sticky="W")
+        self.ch_b4.grid(row=0, column=3, sticky="W")
+        self.ch_b5.grid(row=0, column=4, sticky="W")
 
         self.quit_b = tk.Button(self.menu_f, text="Close", command=self.close_window)
         self.quit_b.place(relx=0.1, rely=0.1, relwidth=0.3, relheight=0.8)
@@ -56,13 +63,13 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
         self.text_lf1 = tk.LabelFrame(self.master, text="Existing variables", relief="flat")
         self.text_lf1.place(relx=0.81, rely=0.01, relwidth=0.185, relheight=0.45)
         self.text_1 = tk.Text(self.text_lf1, bd=4, relief="groove", wrap="word")
-        # warp word powoduje że przenosi całe słowo do następnej linijki
+
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
         self.text_1.configure(state='disabled')
 
-        self.text_lf2 = tk.LabelFrame(self.master,text="Chosen variables", relief="flat")
+        self.text_lf2 = tk.LabelFrame(self.master, text="Chosen variables", relief="flat")
         self.text_lf2.place(relx=0.81, rely=0.46, relwidth=0.185, relheight=0.44)
         self.text_2 = tk.Text(self.text_lf2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
@@ -87,7 +94,11 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
 
         self.check_list = all(item in self.variables for item in self.input_var)
 
-        self.check_b_l = [self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(), self.ch5.get(),]
+        self.check_b_l = [
+            self.ch1.get(), self.ch2.get(), self.ch3.get(),
+            self.ch4.get(), self.ch5.get(),
+            ]
+
         self.check_b_l = [x for x in self.check_b_l if x]
 
         if self.check_b_l:
@@ -95,8 +106,6 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
             if self.input_var:
 
                 if self.check_list:
-                    #todo naprawić że nie odsiwerza po usunięciu zmiennych
-                    #todo skrócić nazwy zniennych zebt mieściły się na wykresie
 
                     self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
 
@@ -115,7 +124,7 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
                         self.figure = plt.figure()
                         self.a = self.figure.add_subplot(111)
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
-                        self.a.set_title("Differentation Measures")
+                        self.a.set_title("Differentiation Measures")
 
                         canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
                         self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
@@ -146,44 +155,3 @@ class DifferentationMeasures:  # todo tutuaj będzie okienko do tworzenia wykres
                 popup_window("Information", "No variables entered.")
         else:
             popup_window("Information", "No statistic chosen.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

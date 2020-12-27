@@ -5,12 +5,19 @@ from Window_popup_message import popup_window
 from Function_data_check import data_preparation
 
 
-class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
-    def __init__(self, master,data):
+class Graphics:
+    def __init__(self, master, data):
         self.master = master
         self.data = data
         self.master.geometry("800x600")
         self.master.resizable(False, False)
+        self.figure = None
+        self.a = None
+        self.df = None
+        self.input_var = None
+        self.check_list = None
+        self.widget = None
+        self.toolbar = None
 
         self.graph_f = tk.LabelFrame(self.master)
         self.graph_f.place(relx=0.005, rely=0.01, relwidth=0.75, relheight=0.98)
@@ -28,7 +35,7 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
 
         self.text_l1 = tk.LabelFrame(self.master, bg="white", text="Existing variables", relief="flat")
         self.text_l1.place(relx=0.76, rely=0.01, relwidth=0.23, relheight=0.44)
-        self.text_1 = tk.Text(self.text_l1, bd=4, relief="groove", wrap="word")#warp word powoduje że przenosi całe słowo do następnej linijki
+        self.text_1 = tk.Text(self.text_l1, bd=4, relief="groove", wrap="word")
         self.text_1.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
         self.text_1.configure(state='normal')
         self.text_1.insert(tk.END, self.variables)
@@ -39,8 +46,7 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
         self.text_2 = tk.Text(self.text_l2, bd=4, relief="groove", wrap="word")
         self.text_2.place(relx=0.01, rely=0.01, relwidth=0.97, relheight=0.97)
 
-        self.widget = None
-        self.toolbar = None
+
 
     def close_window(self):
         self.master.destroy()
@@ -75,25 +81,3 @@ class Graphics:#todo tutuaj będzie okienko do tworzenia wykresów
                 popup_window("Information", "Incorrect variable name!")
         else:
             popup_window("Information", "No variables entered")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
