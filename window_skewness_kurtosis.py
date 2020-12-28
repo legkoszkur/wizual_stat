@@ -190,7 +190,7 @@ class SkewnessKurtosis:
                         self.ch_b2.config(state="normal", )
 
                         self.ch_b6.config(offvalue='', )
-                        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 2, )
+                        self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l,)
 
                         if self.widget:
                             self.widget.destroy()
@@ -204,7 +204,7 @@ class SkewnessKurtosis:
                         self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                         self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                         self.text_stat.configure(state='normal')
-                        self.text_stat.insert(tk.END, self.statistical_backend.skew_kurt_df)
+                        self.text_stat.insert(tk.END, self.statistical_backend.data_for_skewness_and_kurtosis())
                         self.text_stat.configure(state='disabled')
                         self.widget = None
                         self.toolbar = None

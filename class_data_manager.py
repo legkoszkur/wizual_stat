@@ -30,12 +30,15 @@ class DataManager:
                                                     ("Excel Files", "*.xls"),
                                                     ("CSV Files", "*.csv"), ])
 
-            self.path_label["text"] = self.file_path.name
-            self.path_label["bg"] = "light green"
             self.load_data(path=self.file_path.name)
+            self.path_bar_color()
             popup_window("Information", "Data were imported.")
         except AttributeError:
             pass
+
+    def path_bar_color(self):
+        self.path_label["text"] = self.file_path.name
+        self.path_label["bg"] = "light green"
 
     def load_data(self, path):
         try:
@@ -45,7 +48,7 @@ class DataManager:
                     self.data = read_csv(path)
                 elif file_extension == '.xlsx' or file_extension == '.xls':
                     self.data = read_excel(path)
-
+# todo podzielić to na kilka osobnych metod
             except ValueError:
                 tk.messagebox.showerror("Information", "The file_path you have chosen is invalid")
                 return None
@@ -65,7 +68,7 @@ class DataManager:
 
         except AttributeError:
             pass
-        
+
     def remove_data(self):
         self.path_label["text"] = "No File Selected."
         self.path_label["bg"] = "red"

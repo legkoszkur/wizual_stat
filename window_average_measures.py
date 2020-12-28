@@ -122,7 +122,7 @@ class AverageMeasures:
 
                 if self.check_list:
 
-                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_s_l, 0, )
+                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_s_l)
 
                     if self.ratio_var.get() == 0:
                         if self.widget:
@@ -134,7 +134,7 @@ class AverageMeasures:
                         if self.text_stat:
                             self.text_stat.destroy()
 
-                        self.df = self.statistical_backend.average_measures_df
+                        self.df = self.statistical_backend.data_for_average_measures()
                         self.figure = plt.figure()
                         self.a = self.figure.add_subplot(111)
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)

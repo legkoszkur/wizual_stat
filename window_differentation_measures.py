@@ -109,7 +109,7 @@ class DifferentiationMeasures:
 
                 if self.check_list:
 
-                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l, 1, )
+                    self.statistical_backend = StatisticBackend(self.data, self.input_var, self.check_b_l)
 
                     if self.ratio_var.get() == 0:
 
@@ -122,7 +122,7 @@ class DifferentiationMeasures:
                         if self.toolbar:
                             self.toolbar.destroy()
 
-                        self.df = self.statistical_backend.differentiation_measures_df
+                        self.df = self.statistical_backend.data_for_differentiation_measures()
                         self.figure = plt.figure()
                         self.a = self.figure.add_subplot(111)
                         self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
