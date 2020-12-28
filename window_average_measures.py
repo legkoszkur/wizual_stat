@@ -159,7 +159,7 @@ class AverageMeasures:
                         self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
                         self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
                         self.text_stat.configure(state='normal')
-                        self.text_stat.insert(tk.END, self.statistical_backend.average_measures_df)
+                        self.text_stat.insert(tk.END, self.statistical_backend.data_for_average_measures())
                         self.text_stat.configure(state='disabled')
                         self.widget = None
                         self.toolbar = None

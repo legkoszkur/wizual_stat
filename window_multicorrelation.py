@@ -82,7 +82,7 @@ class MultiCorrelation:
                     self.figure = plt.figure()
                     self.a = self.figure.add_subplot(111)
                     sns.heatmap(self.data[self.input_var].corr(method='pearson'),
-                                ax=self.a, linecolor="light gray", annot=True, center=0)
+                                ax=self.a, linecolor="lightgray", annot=True, center=0)
                     plt.title("Correlogram")
 
                     canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)

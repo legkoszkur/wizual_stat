@@ -4,7 +4,7 @@ from scipy.stats import kurtosis, skew
 
 
 class StatisticBackend:
-    def __init__(self, data, input_var, input_stat, ):
+    def __init__(self, data, input_var, input_stat):
         self.data = data
         self.input_var = input_var
         self.input_stat = input_stat
