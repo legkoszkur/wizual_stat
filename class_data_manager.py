@@ -53,6 +53,9 @@ class DataManager:
                 tk.messagebox.showerror("Information", f"No such file path as {path}")
                 return None
 
+            self.tree_view_style["column"] = list(self.data.columns)
+            self.tree_view_style["show"] = "headings"
+
             for column in self.tree_view_style["columns"]:
                 self.tree_view_style.heading(column, text=column)
 
@@ -60,12 +63,9 @@ class DataManager:
             for row in data_rows:
                 self.tree_view_style.insert("", "end", values=row)
 
-            self.tree_view_style["column"] = list(self.data.columns)
-            self.tree_view_style["show"] = "headings"
-
         except AttributeError:
             pass
-
+        
     def remove_data(self):
         self.path_label["text"] = "No File Selected."
         self.path_label["bg"] = "red"
