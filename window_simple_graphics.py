@@ -1,8 +1,8 @@
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from Window_popup_message import popup_window
-from Function_data_check import data_preparation
+from function_popup_message import popup_window
+from function_data_check import data_preparation
 
 
 class Graphics:

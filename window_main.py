@@ -1,13 +1,13 @@
 import tkinter as tk
-from Window_simple_graphics import Graphics
-from Window_Average_measures import AverageMeasures
-from Window_Differentation_measures import DifferentiationMeasures
-from Window_skewness_kurtosis import SkewnessKurtosis
-from Window_popup_message import popup_window
-from Window_correlation import CorrelationWindow
-from Window_multicorrelation import MultiCorrelation
-from Class_data_manager import DataManager
-from Window_Instruction import InstructionWindow
+from window_simple_graphics import Graphics
+from window_average_measures import AverageMeasures
+from window_differentation_measures import DifferentiationMeasures
+from window_skewness_kurtosis import SkewnessKurtosis
+from function_popup_message import popup_window
+from window_correlation import CorrelationWindow
+from window_multicorrelation import MultiCorrelation
+from class_data_manager import DataManager
+from window_instruction import InstructionWindow
 
 
 class StartPage:
