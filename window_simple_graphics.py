@@ -49,33 +49,48 @@ class Graphics:
     def close_window(self):
         self.master.destroy()
 
-    def chosen_data_insert(self):
+    def preparation_and_absorption_of_the_input(self):
+
         self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
         self.check_list = all(item in self.variables for item in self.input_var)
 
+    def check_if_all_input_correct(self):
+
         if self.input_var:
+
             if self.check_list is True:
-
-                if self.widget:
-                    self.widget.destroy()
-
-                if self.toolbar:
-                    self.toolbar.destroy()
-
-                self.figure = plt.figure()
-                self.a = self.figure.add_subplot(111)
-                self.df = self.data[self.input_var]
-                self.df.plot(ax=self.a, )
-                plt.xlabel("Periods", labelpad=1.3)
-                plt.title("Amounts")
-
-                canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-                self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-                self.widget = canvas.get_tk_widget()
-                self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
+                return True
             else:
                 popup_window("Information", "Incorrect variable name!")
+                return False
         else:
             popup_window("Information", "No variables entered")
+            return False
+
+    def destroy_previous_objects(self):
+        if self.widget:
+            self.widget.destroy()
+
+        if self.toolbar:
+            self.toolbar.destroy()
+
+    def create_graph(self):
+        self.figure = plt.figure()
+        self.a = self.figure.add_subplot(111)
+        self.df = self.data[self.input_var]
+        self.df.plot(ax=self.a, )
+        plt.xlabel("Periods", labelpad=1.3)
+        plt.title("Amounts")
+
+        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+        self.widget = canvas.get_tk_widget()
+        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    def chosen_data_insert(self):
+        self.preparation_and_absorption_of_the_input()
+        if self.check_if_all_input_correct():
+            self.destroy_previous_objects()
+            self.create_graph()
+

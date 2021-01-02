@@ -63,13 +63,14 @@ class CorrelationWindow:
     def close_window(self):
         self.master.destroy()
 
-    def chosen_data_insert(self):
+    def preparation_and_absorption_of_the_input(self):
         self.input_var1 = data_preparation(self.text_2.get("1.0", "end"))
         self.input_var2 = data_preparation(self.text_3.get("1.0", "end"))
 
         self.check_list1 = all(item in self.variables for item in self.input_var1)
         self.check_list2 = all(item in self.variables for item in self.input_var2)
 
+    def check_if_all_input_correct(self):
         if self.input_var1:
 
             if self.input_var2:
@@ -77,38 +78,63 @@ class CorrelationWindow:
                 if self.check_list1:
 
                     if self.check_list2:
-
-                        if self.widget:
-                            self.widget.destroy()
-
-                        if self.toolbar:
-                            self.toolbar.destroy()
-
-                        self.figure = plt.Figure()
-                        self.a = self.figure.add_subplot(111)
-
-                        self.a.scatter(self.data[self.input_var1[0]], self.data[self.input_var2[0]],)
-                        self.a.set_xlabel(self.input_var1[0], labelpad=0)
-                        self.a.set_ylabel(self.input_var2[0], labelpad=0)
-                        self.a.set_title("Correlogram")
-
-                        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-                        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-                        self.widget = canvas.get_tk_widget()
-                        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-
-                        self.text_4.configure(state='normal')
-                        self.text_4.delete("1.0", "end")
-                        self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
-                        self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
-                        self.text_4.insert(tk.END, round(self.correlation, 6))
-                        self.text_4.configure(state='disabled')
-
+                        return True
                     else:
                         popup_window("Information", "Incorrect variable name on second entry!")
+                        return False
                 else:
                     popup_window("Information", "Incorrect variable name on first entry!")
+                    return False
             else:
                 popup_window("Information", "No variables entered on second entry!")
+                return False
         else:
             popup_window("Information", "No variables entered on first entry!")
+            return False
+
+    def destroy_previous_objects(self):
+
+        if self.widget:
+            self.widget.destroy()
+
+        if self.toolbar:
+            self.toolbar.destroy()
+
+    def create_graph(self):
+        self.figure = plt.Figure()
+        self.a = self.figure.add_subplot(111)
+
+        self.a.scatter(self.data[self.input_var1[0]], self.data[self.input_var2[0]], )
+        self.a.set_xlabel(self.input_var1[0], labelpad=0)
+        self.a.set_ylabel(self.input_var2[0], labelpad=0)
+        self.a.set_title("Correlogram")
+
+        canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
+        self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
+        self.widget = canvas.get_tk_widget()
+        self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+
+    def create_data(self):
+        self.text_4.configure(state='normal')
+        self.text_4.delete("1.0", "end")
+        self.corr_df = self.data[[self.input_var1[0], self.input_var2[0]]]
+        self.correlation = self.corr_df.corr(method='pearson').iloc[0][1]
+        self.text_4.insert(tk.END, round(self.correlation, 6))
+        self.text_4.configure(state='disabled')
+
+    def chosen_data_insert(self):
+        self.preparation_and_absorption_of_the_input()
+        if self.check_if_all_input_correct():
+            self.destroy_previous_objects()
+            self.create_graph()
+            self.create_data()
+
+
+
+
+
+
+
+
+
+
