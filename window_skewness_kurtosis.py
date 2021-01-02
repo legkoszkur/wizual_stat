@@ -103,8 +103,6 @@ class SkewnessKurtosis:
     def close_window(self):
         self.master.destroy()
 
-
-
     def preparation_and_absorption_of_the_input(self):
         self.input_var = data_preparation(self.text_2.get("1.0", "end"))
 
@@ -228,6 +226,7 @@ class SkewnessKurtosis:
         if self.check_if_all_input_correct():
 
             if self.ratio_var.get() == 0:
+
                 if self.check_if_only_one_var_for_graph():
                     self.config_var_options_for_graph()
                     self.destroy_previous_objects()
@@ -241,13 +240,3 @@ class SkewnessKurtosis:
                 self.config_var_options_for_data()
                 self.destroy_previous_objects()
                 self.create_data()
-
-
-
-
-
-
-
-
-
-

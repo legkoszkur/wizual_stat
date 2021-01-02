@@ -32,7 +32,6 @@ class StatisticBackend:
             "Median", "Dominant"
         ]
 
-
     def data_for_average_measures(self):
         for i in self.input_var:
             self.average_m_l.append([

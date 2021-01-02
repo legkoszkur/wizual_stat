@@ -128,13 +128,3 @@ class CorrelationWindow:
             self.destroy_previous_objects()
             self.create_graph()
             self.create_data()
-
-
-
-
-
-
-
-
-
-

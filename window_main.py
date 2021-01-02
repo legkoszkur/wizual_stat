@@ -42,7 +42,7 @@ class StartPage:
         stat.add_command(label="Average measures", command=lambda: self.new_window(AverageMeasures))
         stat.add_command(label="Differentiation measures", command=lambda: self.new_window(DifferentiationMeasures))
         other.add_command(label="Skewness and kurtosis", command=lambda: self.new_window(SkewnessKurtosis))
-        instruction.add_command(label="How to insert input", command=lambda: InstructionWindow(tk.Toplevel(self.master)))
+        instruction.add_command(label="Variables insert", command=lambda: InstructionWindow(tk.Toplevel(self.master)))
 
         self.menu_bar.add_cascade(label="Options", menu=opti)
         self.menu_bar.add_cascade(label="Graphics", menu=graph, )

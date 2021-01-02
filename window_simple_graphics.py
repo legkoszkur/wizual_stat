@@ -93,4 +93,3 @@ class Graphics:
         if self.check_if_all_input_correct():
             self.destroy_previous_objects()
             self.create_graph()
-

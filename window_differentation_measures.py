@@ -164,15 +164,3 @@ class DifferentiationMeasures:
             elif self.ratio_var.get() == 1:
                 self.destroy_previous_objects()
                 self.create_data()
-
-
-
-
-
-
-
-
-
-
-
-
