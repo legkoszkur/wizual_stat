@@ -1,83 +1,90 @@
-def close_window(self):
-    self.master.destroy()
+from tkinter.filedialog import askopenfile
+from tkinter import ttk, Label, Scrollbar
+from pandas import read_csv, read_excel
+import os
+from function_popup_message import popup_window
 
 
-def preparation_and_absorption_of_the_input(self):
-    self.input_var = data_preparation(self.text_2.get("1.0", "end"))
-    self.check_list = all(item in self.variables for item in self.input_var)
+class DataManager:
 
-    self.input_s_l = [
-        self.ch1.get(), self.ch2.get(), self.ch3.get(), self.ch4.get(),
-        self.ch5.get(), self.ch6.get(), self.ch7.get(), self.ch8.get(),
-    ]
+    def __init__(self, master, frame_with_data):
+        self.data = None
+        self.tree_view_style = ttk.Treeview(frame_with_data)
+        self.tree_view_style.place(relheight=1, relwidth=1)
+        y_scrollbar = Scrollbar(frame_with_data, orient="vertical", command=self.tree_view_style.yview)
+        x_scrollbar = Scrollbar(frame_with_data, orient="horizontal", command=self.tree_view_style.xview)
+        self.tree_view_style.configure(xscrollcommand=x_scrollbar.set, yscrollcommand=y_scrollbar.set)
+        x_scrollbar.pack(side="bottom", fill="x")
+        y_scrollbar.pack(side="right", fill="y")
 
-    self.input_s_l = [
-        x for x in self.input_s_l if x
-    ]
+        self.__path_label = Label(master, bg="red", text="No File Selected.")
+        self.__path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
 
+    def __file_dialog(self):
+        file_path = askopenfile(mode='r', title="Select A File",
+                                     filetypes=[("Excel Files", "*.xlsx"),
+                                                  ("Excel Files", "*.xls"),
+                                                  ("CSV Files", "*.csv",)])
+        return file_path
 
-def check_if_all_input_correct(self):
-    if self.input_s_l:
-
-        if self.input_var:
-
-            if self.check_list:
-                self.statistical_backend = StatisticBackend(self.data, self.input_var, self.input_s_l)
-                return True
-            else:
-                popup_window("Information", "Incorrect variable name!")
-                return False
+    def __get_path(self, path):
+        try:
+            name, file_extension = os.path.splitext(path.name)
+        except AttributeError:
+            return None
+            pass
         else:
-            popup_window("Information", "No variables entered.")
-            return False
-    else:
-        popup_window("Information", "No statistic chosen.")
-        return False
+            return [name, file_extension]
 
+    def __read_data(self, path_elements_list):
+        data = None
+        if path_elements_list[1] == '.csv':
+            data = read_csv(path_elements_list[0])
+        elif path_elements_list[1] == '.xlsx' or path_elements_list[1] == '.xls':
+            data = read_excel(path_elements_list[0])
+        else:
+            popup_window("Error","There is some unexpected error, please try another file.")
+        print("coś nie tak")
+        self.data = data
+        return data
 
-def destroy_previous_objects(self):
-    if self.widget:
-        self.widget.destroy()
+    def __insert_data_into_tree_view(self, data, tree_view):
+        tree_view["column"] = list(data.columns)
+        tree_view["show"] = "headings"
 
-    if self.toolbar:
-        self.toolbar.destroy()
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text=column)
 
-    if self.text_stat:
-        self.text_stat.destroy()
+        data_rows = data.to_numpy().tolist()
+        for row in data_rows:
+            tree_view.insert("", "end", values=row)
 
+    def __remove_data_from_tree_view(self, tree_view):
+        tree_view.delete(*tree_view.get_children())
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text="")
+        self.data = None
 
-def create_graph(self):
-    self.df = self.statistical_backend.data_for_average_measures()
-    self.figure = plt.figure()
-    self.a = self.figure.add_subplot(111)
-    self.bar_g = self.df.plot(kind="bar", ax=self.a, rot=True)
-    self.a.set_title("Average measures")
+    def __path_bar_color_on(self, label, path_name):
+        label["text"] = path_name
+        label["bg"] = "light green"
 
-    canvas = FigureCanvasTkAgg(self.figure, master=self.graph_f)
-    self.toolbar = NavigationToolbar2Tk(canvas, self.graph_f)
-    self.widget = canvas.get_tk_widget()
-    self.widget.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+    def __path_bar_color_off(self, label):
+        label["text"] = "No File Selected."
+        label["bg"] = "red"
 
+    def load_data(self):
 
-def create_data(self):
-    self.text_stat = tk.Text(self.graph_f, bd=4, relief="groove", wrap="word")
-    self.text_stat.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-    self.text_stat.configure(state='normal')
-    self.text_stat.insert(tk.END, self.statistical_backend.data_for_average_measures())
-    self.text_stat.configure(state='disabled')
-    self.widget = None
-    self.toolbar = None
+        path = self.__file_dialog()
 
+        parts_of_path = self.__get_path(path)
+        print("tuaj")
+        data = self.__read_data(parts_of_path)
 
-def chosen_data_insert(self):
-    self.preparation_and_absorption_of_the_input()
+        self.__insert_data_into_tree_view(data, self.tree_view_style)
+        self.__path_bar_color_on(self.__path_label, parts_of_path[0])
+        popup_window("Information", "Data were imported.")
 
-    if self.check_if_all_input_correct():
-
-        if self.ratio_var.get() == 0:
-            self.destroy_previous_objects()
-            self.create_graph()
-
-        elif self.ratio_var.get() == 1:
-            self.destroy_previous_objects()
-            self.create_data()
+    def remove_data(self):
+        self.__remove_data_from_tree_view(self.tree_view_style)
+        self.__path_bar_color_off(self.__path_label)

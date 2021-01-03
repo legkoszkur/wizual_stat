@@ -1,7 +1,6 @@
-import tkinter as tk
 from tkinter.filedialog import askopenfile
-from tkinter import messagebox, ttk
-from pandas import *
+from tkinter import ttk, Label, Scrollbar
+from pandas import read_csv, read_excel
 import os
 from function_popup_message import popup_window
 
@@ -10,69 +9,83 @@ class DataManager:
 
     def __init__(self, master, frame_with_data):
         self.data = None
-        self.file_path = None
-
         self.tree_view_style = ttk.Treeview(frame_with_data)
         self.tree_view_style.place(relheight=1, relwidth=1)
-        y_scrollbar = tk.Scrollbar(frame_with_data, orient="vertical", command=self.tree_view_style.yview)
-        x_scrollbar = tk.Scrollbar(frame_with_data, orient="horizontal", command=self.tree_view_style.xview)
+        y_scrollbar = Scrollbar(frame_with_data, orient="vertical", command=self.tree_view_style.yview)
+        x_scrollbar = Scrollbar(frame_with_data, orient="horizontal", command=self.tree_view_style.xview)
         self.tree_view_style.configure(xscrollcommand=x_scrollbar.set, yscrollcommand=y_scrollbar.set)
         x_scrollbar.pack(side="bottom", fill="x")
         y_scrollbar.pack(side="right", fill="y")
 
-        self.path_label = tk.Label(master, bg="red", text="No File Selected.")
-        self.path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
+        self.__path_label = Label(master, bg="red", text="No File Selected.")
+        self.__path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
 
-    def file_dialog(self):
+    @staticmethod
+    def __file_dialog():
+        file_path = askopenfile(mode='r', title="Select A File",
+                                     filetypes=[("Excel Files", "*.xlsx"),
+                                                ("Excel Files", "*.xls"),
+                                                ("CSV Files", "*.csv",)])
+        return file_path
+
+    @staticmethod
+    def __get_path(path):
         try:
-            self.file_path = askopenfile(mode='r', title="Select A File",
-                                         filetypes=[("Excel Files", "*.xlsx"),
-                                                    ("Excel Files", "*.xls"),
-                                                    ("CSV Files", "*.csv"), ])
-
-            self.load_data(path=self.file_path.name)
-            self.path_bar_color()
-            popup_window("Information", "Data were imported.")
+            name, file_extension = os.path.splitext(path.name)
         except AttributeError:
+            return None
             pass
+        else:
+            return [path.name, file_extension]
 
-    def path_bar_color(self):
-        self.path_label["text"] = self.file_path.name
-        self.path_label["bg"] = "light green"
+    @staticmethod
+    def __read_data(path_elements_list):
+        data = None
+        if path_elements_list[1] == '.csv':
+            data = read_csv(path_elements_list[0])
+        elif path_elements_list[1] == '.xlsx' or path_elements_list[1] == '.xls':
+            data = read_excel(path_elements_list[0])
+        else:
+            popup_window("Error", "There is some unexpected error, please try another file.")
+        return data
 
-    def load_data(self, path):
-        try:
-            name, file_extension = os.path.splitext(path)
-            try:
-                if file_extension == '.csv':
-                    self.data = read_csv(path)
-                elif file_extension == '.xlsx' or file_extension == '.xls':
-                    self.data = read_excel(path)
-# todo podzielić to na kilka osobnych metod
-            except ValueError:
-                tk.messagebox.showerror("Information", "The file_path you have chosen is invalid")
-                return None
-            except FileNotFoundError:
-                tk.messagebox.showerror("Information", f"No such file path as {path}")
-                return None
+    @staticmethod
+    def __insert_data_into_tree_view(data, tree_view):
+        tree_view["column"] = list(data.columns)
+        tree_view["show"] = "headings"
 
-            self.tree_view_style["column"] = list(self.data.columns)
-            self.tree_view_style["show"] = "headings"
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text=column)
 
-            for column in self.tree_view_style["columns"]:
-                self.tree_view_style.heading(column, text=column)
+        data_rows = data.to_numpy().tolist()
+        for row in data_rows:
+            tree_view.insert("", "end", values=row)
 
-            data_rows = self.data.to_numpy().tolist()
-            for row in data_rows:
-                self.tree_view_style.insert("", "end", values=row)
+    @staticmethod
+    def __remove_data_from_tree_view(tree_view):
+        tree_view.delete(*tree_view.get_children())
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text="")
 
-        except AttributeError:
-            pass
+    @staticmethod
+    def __path_bar_color_on(label, path_name):
+        label["text"] = path_name
+        label["bg"] = "light green"
+
+    @staticmethod
+    def __path_bar_color_off(label):
+        label["text"] = "No File Selected."
+        label["bg"] = "red"
+
+    def load_data(self):
+        path = self.__file_dialog()
+        parts_of_path = self.__get_path(path)
+        self.data = self.__read_data(parts_of_path)
+        self.__insert_data_into_tree_view(self.data, self.tree_view_style)
+        self.__path_bar_color_on(self.__path_label, parts_of_path[0])
+        popup_window("Information", "Data were imported.")
 
     def remove_data(self):
-        self.path_label["text"] = "No File Selected."
-        self.path_label["bg"] = "red"
-        self.tree_view_style.delete(*self.tree_view_style.get_children())
-        for column in self.tree_view_style["columns"]:
-            self.tree_view_style.heading(column, text="")
+        self.__remove_data_from_tree_view(self.tree_view_style)
+        self.__path_bar_color_off(self.__path_label)
         self.data = None

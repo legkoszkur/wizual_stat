@@ -1,53 +1,85 @@
-import tkinter
-from matplotlib.backends.backend_tkagg import (
-    FigureCanvasTkAgg, NavigationToolbar2Tk)
-# Implement the default Matplotlib key bindings.
-from matplotlib.backend_bases import key_press_handler
-from matplotlib.figure import Figure
-import numpy as np
-import pandas as pd
-
-x = [[-4632.0, -52.6364, 1.0, -99.0, -56.0, -78.00, -28.50, -65.0,],
-     [4723.0, 53.6705, 99.0, 1.0, 52.5, 33.50, 79.25, 24.0],
-     [4938.0, 56.1136, 100.0, 2.0, 64.0, 29.75, 81.25, 68.0],
-     [4119.0, 46.8068, 99.0, 1.0, 42.5, 22.00, 73.25, 81.0]]
-inde = ["x1", "x2", "x3", "x4"]
-kolumn = ["Sum", "Mean", "Max", "Min", "Median", "Quantile_25", "Quantile_75", "Dominant",]
-df = pd.DataFrame(x, index=inde, columns=kolumn)
+from tkinter.filedialog import askopenfile
+from tkinter import ttk, Label, Scrollbar
+from pandas import read_csv, read_excel
+import os
+from function_popup_message import popup_window
 
 
-root = tkinter.Tk()
-root.wm_title("Embedding in Tk")
+class DataManager:
 
-fig = Figure(figsize=(5, 4), dpi=100)
-t = np.arange(0, 3, .01)
-fig.add_subplot().plot(df,kind="bar")
+    def __init__(self, master, frame_with_data):
+        self.data = None
+        self.tree_view_style = ttk.Treeview(frame_with_data)
+        self.tree_view_style.place(relheight=1, relwidth=1)
+        y_scrollbar = Scrollbar(frame_with_data, orient="vertical", command=self.tree_view_style.yview)
+        x_scrollbar = Scrollbar(frame_with_data, orient="horizontal", command=self.tree_view_style.xview)
+        self.tree_view_style.configure(xscrollcommand=x_scrollbar.set, yscrollcommand=y_scrollbar.set)
+        x_scrollbar.pack(side="bottom", fill="x")
+        y_scrollbar.pack(side="right", fill="y")
 
-canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
-canvas.draw()
-canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        self.__path_label = Label(master, bg="red", text="No File Selected.")
+        self.__path_label.place(relx=0.005, rely=0.95, relwidth=0.99, relheight=0.04)
 
-toolbar = NavigationToolbar2Tk(canvas, root)
-toolbar.update()
-canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+    def __file_dialog(self):
+        file_path = askopenfile(mode='r', title="Select A File",
+                                     filetypes=[("Excel Files", "*.xlsx"),
+                                                  ("Excel Files", "*.xls"),
+                                                  ("CSV Files", "*.csv",)])
+        return file_path
 
+    def __get_path(self, path):
+        try:
+            name, file_extension = os.path.splitext(path.name)
+        except AttributeError:
+            return None
+            pass
+        else:
+            return [path.name, file_extension]
 
-def on_key_press(event):
-    print("you pressed {}".format(event.key))
-    key_press_handler(event, canvas, toolbar)
+    def __read_data(self, path_elements_list):
+        data = None
+        if path_elements_list[1] == '.csv':
+            data = read_csv(path_elements_list[0])
+        elif path_elements_list[1] == '.xlsx' or path_elements_list[1] == '.xls':
+            data = read_excel(path_elements_list[0])
+        else:
+            popup_window("Error","There is some unexpected error, please try another file.")
+        self.data = data
+        return data
 
+    def __insert_data_into_tree_view(self, data, tree_view):
+        tree_view["column"] = list(data.columns)
+        tree_view["show"] = "headings"
 
-canvas.mpl_connect("key_press_event", on_key_press)
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text=column)
 
+        data_rows = data.to_numpy().tolist()
+        for row in data_rows:
+            tree_view.insert("", "end", values=row)
 
-def _quit():
-    root.quit()     # stops mainloop
-    root.destroy()  # this is necessary on Windows to prevent
-                    # Fatal Python Error: PyEval_RestoreThread: NULL tstate
+    def __remove_data_from_tree_view(self, tree_view):
+        tree_view.delete(*tree_view.get_children())
+        for column in tree_view["columns"]:
+            tree_view.heading(column, text="")
+        self.data = None
 
+    def __path_bar_color_on(self, label, path_name):
+        label["text"] = path_name
+        label["bg"] = "light green"
 
-button = tkinter.Button(master=root, text="Quit", command=_quit)
-button.pack(side=tkinter.BOTTOM)
+    def __path_bar_color_off(self, label):
+        label["text"] = "No File Selected."
+        label["bg"] = "red"
 
-tkinter.mainloop()
-# If you put root.dest
+    def load_data(self):
+        path = self.__file_dialog()
+        parts_of_path = self.__get_path(path)
+        data = self.__read_data(parts_of_path)
+        self.__insert_data_into_tree_view(data, self.tree_view_style)
+        self.__path_bar_color_on(self.__path_label, parts_of_path[0])
+        popup_window("Information", "Data were imported.")
+
+    def remove_data(self):
+        self.__remove_data_from_tree_view(self.tree_view_style)
+        self.__path_bar_color_off(self.__path_label)

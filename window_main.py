@@ -32,7 +32,7 @@ class StartPage:
         other = tk.Menu(self.menu_bar, tearoff=False)
         instruction = tk.Menu(self.menu_bar, tearoff=False)
 
-        opti.add_command(label="Load", command=lambda: self.data_manager.file_dialog(), )
+        opti.add_command(label="Load", command=lambda: self.data_manager.load_data(), )
         opti.add_command(label="Remove", command=lambda: self.data_manager.remove_data(), )
         opti.add_command(label="Exit", command=lambda: quit())
 
