@@ -68,24 +68,25 @@ class DataManager:
             tree_view.heading(column, text="")
 
     @staticmethod
-    def __path_bar_color_on(label, path_name):
-        label["text"] = path_name
-        label["bg"] = "light green"
+    def __path_bar_color(label, text, status):
 
-    @staticmethod
-    def __path_bar_color_off(label):
-        label["text"] = "No File Selected."
-        label["bg"] = "red"
+        if status == "On":
+            label["text"] = text
+            label["bg"] = "light green"
+
+        elif status == "Off":
+            label["text"] = text
+            label["bg"] = "red"
 
     def load_data(self):
         path = self.__file_dialog()
         parts_of_path = self.__get_path(path)
         self.data = self.__read_data(parts_of_path)
         self.__insert_data_into_tree_view(self.data, self.tree_view_style)
-        self.__path_bar_color_on(self.__path_label, parts_of_path[0])
+        self.__path_bar_color(self.__path_label, text=parts_of_path[0], status="On")
         popup_window("Information", "Data were imported.")
 
     def remove_data(self):
         self.__remove_data_from_tree_view(self.tree_view_style)
-        self.__path_bar_color_off(self.__path_label)
+        self.__path_bar_color(self.__path_label, text="No File Selected.", status="Off")
         self.data = None

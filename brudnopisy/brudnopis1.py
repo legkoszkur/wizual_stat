@@ -47,7 +47,7 @@ class DataManager:
                     self.data = read_csv(path)
                 elif file_extension == '.xlsx' or file_extension == '.xls':
                     self.data = read_excel(path)
-# todo podzielić to na kilka osobnych metod
+
 
             except ValueError:
                 messagebox.showerror("Information", "The file_path you have chosen is invalid")
