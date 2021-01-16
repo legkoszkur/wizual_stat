@@ -1,6 +1,7 @@
 from tkinter import Label, LabelFrame, Text, END
 
 
+# this class create window with short instruction
 class InstructionWindow:
 
     def __init__(self, master, ):

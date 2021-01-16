@@ -1,3 +1,4 @@
+# This function clean data insert by user
 def data_preparation(input_var):
     result = input_var.split(" ")
     result = [
