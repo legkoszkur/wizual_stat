@@ -3,20 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c9604b01-e3ac-4915-8c91-145e86eb07ee" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brudnopisy/brudnopis1.py" beforeDir="false" afterPath="$PROJECT_DIR$/brudnopisy/brudnopis1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/brudnopisy/brudnopis3.py" beforeDir="false" afterPath="$PROJECT_DIR$/brudnopisy/brudnopis3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class_data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/class_data_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class_statistical_backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/class_statistical_backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function_data_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/function_data_check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/function_popup_message.py" beforeDir="false" afterPath="$PROJECT_DIR$/function_popup_message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_average_measures.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_average_measures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_correlation.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_correlation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_differentation_measures.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_differentation_measures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window_instruction.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_instruction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_multicorrelation.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_multicorrelation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_simple_graphics.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_simple_graphics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_skewness_kurtosis.py" beforeDir="false" afterPath="$PROJECT_DIR$/window_skewness_kurtosis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
